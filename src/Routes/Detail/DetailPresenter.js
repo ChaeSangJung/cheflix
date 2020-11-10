@@ -5,7 +5,7 @@ import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import VideoComponets from "Components/VideoComponets";
 
-// import { useTabs } from "../../hooks";
+import { useTabs } from "../../hooks";
 import img_star from './images/rating_star.png';
 import user from './images/user.png';
 
@@ -239,12 +239,151 @@ const TextSasonName = styled.p`
 
 const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) => {
 
+  const movies = [
+    {
+      id: 1,
+      tabs: "Cast",
+      content: 
+      <OuterCast>
+        {casts && casts.cast.length > 0 && 
+          casts.cast.map(crew =>
+            <WrapCast key={crew.credit_id}>
+              <BoxCastImage>
+                {
+                  crew.profile_path ? 
+                    <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
+                    <img src={user} alt={crew.name}/>  
+                }
+              </BoxCastImage>
+              <div>
+                <TextCrewName>{crew.name}</TextCrewName>
+                <TextCharacterName>{crew.character}</TextCharacterName>
+              </div>
+            </WrapCast>
+        )}
+      </OuterCast>
+    },
+    {
+      id: 2,
+      tabs: "Videos",
+      content:
+      <WrapVideoOuter>
+        {result && result.videos.results.length > 0 &&
+          result.videos.results.map(i => i.site === 'YouTube' ?
+              <WrapVideoInner key={i.id}>
+                <VideoComponets name={i.name} />
+                <WrapVideoFrame>
+                  <VideoFrame
+                    id={i.id}
+                    key={i.id}
+                    title={i.id}
+                    src={`https://www.youtube.com/embed/${i.key}`}
+                    allowFullScreen='allowFullScreen'
+                    frameBorder='0'
+                  />
+                </WrapVideoFrame>          
+              </WrapVideoInner>
+          : null)}
+        </WrapVideoOuter>
+    },
+    {
+      id: 3,
+      tabs: "Companies",
+      content: 
+      <ListCompany>
+        {result && result.production_companies.length > 0 &&
+          result.production_companies.map(company =>
+            <ItemCompany key={company.id}>
+              <BoxImages>
+                {company.logo_path ?
+                  <Images src={`https://image.tmdb.org/t/p/original/${company.logo_path}`} alt={company.name}/>
+                  :
+                  null
+                }
+              </BoxImages>
+              <TextCompany>{company.name}</TextCompany>
+            </ItemCompany>
+          )
+        }
+      </ListCompany>
+    }, 
+  ]
+
+  const tvShowes = [    
+    {
+      id: 1,
+      tabs: "Cast",
+      content: 
+      <OuterCast>
+        {casts && casts.cast.length > 0 && 
+          casts.cast.map(crew =>
+            <WrapCast key={crew.credit_id}>
+              <BoxCastImage>
+                {
+                  crew.profile_path ? 
+                    <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
+                    <img src={user} alt={crew.name}/>  
+                }
+              </BoxCastImage>
+              <div>
+                <TextCrewName>{crew.name}</TextCrewName>
+                <TextCharacterName>{crew.character}</TextCharacterName>
+              </div>
+            </WrapCast>
+        )}
+      </OuterCast>
+    },
+    {
+      id: 2,
+      tabs: "Videos",
+      content:
+      <WrapVideoOuter>
+        {result && result.videos.results.length > 0 &&
+          result.videos.results.map(i => i.site === 'YouTube' ?
+              <WrapVideoInner key={i.id}>
+                <VideoComponets name={i.name} type={i.type} />
+                <WrapVideoFrame>
+                  <VideoFrame
+                    id={i.id}
+                    key={i.id}
+                    title={i.id}
+                    src={`https://www.youtube.com/embed/${i.key}`}
+                    allowFullScreen='allowFullScreen'
+                    frameBorder='0'
+                  />
+                </WrapVideoFrame>          
+              </WrapVideoInner>
+          : null)}
+        </WrapVideoOuter>
+    },
+    {
+      id: 3,
+      tabs: "Companies",
+      content: 
+      <ListCompany>
+        {result && result.production_companies.length > 0 &&
+          result.production_companies.map(company =>
+            <ItemCompany key={company.id}>
+              <BoxImages>
+                {company.logo_path ?
+                  <Images src={`https://image.tmdb.org/t/p/original/${company.logo_path}`} alt={company.name}/>
+                  :
+                  null
+                }
+              </BoxImages>
+              <TextCompany>{company.name}</TextCompany>
+            </ItemCompany>
+          )
+        }
+      </ListCompany>
+    },
+  ]
+
+  const {currentItem, changeItem} = useTabs(0, isMovie ? movies : tvShowes);  
+  const [active, setActivity] =useState(1);
+
+
   
-
-  // const {currentItem, changeItem} = useTabs(0, isMovie ? movies : tvShowes);  
-  // const [active, setActivity] =useState(1);
-
-  const [tab, setTab] = useState("video");
 
   return (
     loading ?  
@@ -263,26 +402,6 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
             | Nomflix
           </title>
         </Helmet>
-
-        <ul>
-              <li onClick={() => setTab("Cast")} active={tab === "Cast"}>
-                Cast
-              </li>
-              <li
-                onClick={() => setTab("Video")}
-                active={tab === "Video"}
-              >
-                Video
-              </li>
-              {result.seasons && (
-                <li
-                  onClick={() => setTab("seasons")}
-                  active={tab === "seasons"}
-                >
-                  Seasons
-                </li>
-              )}
-            </ul>
 
         <BannerDiv bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`} />        
         <Content>
@@ -370,7 +489,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
         </WrapSeasons>
         }
 
-        {/* <WrapTabsContent>
+        <WrapTabsContent>
         <>
           {isMovie ? (
               <>
@@ -416,7 +535,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
             )
           }
         </>
-        </WrapTabsContent> */}
+        </WrapTabsContent>
       </Container>
     
   );
