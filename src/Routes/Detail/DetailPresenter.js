@@ -474,7 +474,7 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
         <WrapSeasons>
           {result && result.seasons.length > 0 &&
             result.seasons.map(season =>
-              <BoxSeasons>
+              <BoxSeasons key={season.id}>
                 <BoxPosterSeasons>
                   <img src={`https://image.tmdb.org/t/p/w500${season.poster_path}`} alt={season.name}/>
                 </BoxPosterSeasons>
