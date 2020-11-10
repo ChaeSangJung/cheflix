@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HomePresenter from "./HomePresenter";
 import { moviesApi } from "api";
 
-export default class extends React.Component {
-  state = {
-    nowPlaying: null,
-    upcoming: null,
-    popular: null,
-    error: null,
-    loading: true
-  };
+export default function HomeContainer() {
+  // setting useState 
+  const [nowPlaying, setNowPlaying] = useState(null);
+  const [upcoming, setUpcoming] = useState(null);
+  const [popular, setPopular] = useState(null);
+  const [error, setEerror] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  async componentDidMount() {
+  // making function
+  async function getHome() {
     try {
       const {
         data: { results: nowPlaying }
@@ -22,32 +22,28 @@ export default class extends React.Component {
       const {
         data: { results: popular }
       } = await moviesApi.popular();
-      this.setState({
-        nowPlaying,
-        upcoming,
-        popular
-      });
+      setNowPlaying(nowPlaying);
+      setUpcoming(upcoming);
+      setPopular(popular);
     } catch {
-      this.setState({
-        error: "Can't find movie information."
-      });
+      setEerror("Can't find movie information.");
     } finally {
-      this.setState({
-        loading: false
-      });
+      setLoading(false);
     }
   }
 
-  render() {
-    const { nowPlaying, upcoming, popular, error, loading } = this.state;
-    return (
-      <HomePresenter
-        nowPlaying={nowPlaying}
-        upcoming={upcoming}
-        popular={popular}
-        error={error}
-        loading={loading}
-      />
-    );
-  }
+  // useEffect
+  useEffect(()=>{
+    getHome();
+  },[]);
+
+  return (
+    <HomePresenter
+      nowPlaying={nowPlaying}
+      upcoming={upcoming}
+      popular={popular}
+      error={error}
+      loading={loading}
+    />
+  );
 }

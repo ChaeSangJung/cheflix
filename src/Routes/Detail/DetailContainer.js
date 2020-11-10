@@ -11,6 +11,7 @@ export default class extends React.Component {
     this.state = {
       result: null,
       error: null,
+      imdb_id: null,
       loading: true,
       isMovie: pathname.includes("/movie/")
     };
@@ -28,22 +29,29 @@ export default class extends React.Component {
     if (isNaN(parsedId)) {
       return push("/");
     }
-    let result = null;
+    
     try {
       if (isMovie) {
-        ({ data: result } = await moviesApi.movieDetail(parsedId));
+        const { data: result } = await moviesApi.movieDetail(parsedId);
+        const { data: casts  } = await moviesApi.movieCredits(parsedId);
+
+        return this.setState({ result, casts })
       } else {
-        ({ data: result } = await tvApi.showDetail(parsedId));
+        const { data: result } = await tvApi.showDetail(parsedId);
+        const { data: { imdb_id } } = await tvApi.tvImdb(parsedId);
+        const { data: casts  } = await tvApi.tvCredits(parsedId)
+        
+        return this.setState({ result, imdb_id, casts })
       }
     } catch {
       this.setState({ error: "Can't find anything." });
     } finally {
-      this.setState({ loading: false, result });
+      this.setState({ loading: false });
     }
   }
 
   render() {
-    const { result, error, loading } = this.state;
-    return <DetailPresenter result={result} error={error} loading={loading} />;
+    const { result, error, loading, isMovie, imdb_id, casts } = this.state
+    return <DetailPresenter result={result} error={error} loading={loading} isMovie={isMovie} imdb_id={imdb_id} casts={casts} />;
   }
 }
