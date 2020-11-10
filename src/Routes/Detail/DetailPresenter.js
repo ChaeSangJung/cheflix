@@ -81,7 +81,6 @@ const Overview = styled.p`
   line-height: 1.6;
   width: 50%;
 `;
-
 const TabWrap = styled.div`
   position: relative;
   font-size: 0;
