@@ -237,7 +237,8 @@ const TextSasonName = styled.p`
   text-align: left;
 `;
 
-function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
+function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {  
+
   const movies = [
     {
       id: 1,
@@ -380,7 +381,7 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
 
   const {currentItem, changeItem} = useTabs(0, isMovie ? movies : tvShowes);  
   const [active, setActivity] =useState(1);
-
+  
   return (
     loading ?  
       <>
