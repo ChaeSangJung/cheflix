@@ -5,7 +5,7 @@ import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import VideoComponets from "Components/VideoComponets";
 
-import { useTabs } from "../../hooks";
+// import { useTabs } from "../../hooks";
 import img_star from './images/rating_star.png';
 import user from './images/user.png';
 
@@ -379,9 +379,11 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
     },
   ]
 
-  const {currentItem, changeItem} = useTabs(0, isMovie ? movies : tvShowes);  
-  const [active, setActivity] =useState(1);
-  
+  // const {currentItem, changeItem} = useTabs(0, isMovie ? movies : tvShowes);  
+  // const [active, setActivity] =useState(1);
+
+  const [tab, setTab] = useState("video");
+
   return (
     loading ?  
       <>
@@ -486,7 +488,7 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
         </WrapSeasons>
         }
 
-        <WrapTabsContent>
+        {/* <WrapTabsContent>
         <>
           {isMovie ? (
               <>
@@ -532,7 +534,7 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
             )
           }
         </>
-        </WrapTabsContent>
+        </WrapTabsContent> */}
       </Container>
     
   );
