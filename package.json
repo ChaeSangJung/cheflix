@@ -1,5 +1,5 @@
 {
-  "name": "cheflix",
+  "name": "nomflix",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,8 +15,8 @@
     "styled-reset": "^1.6.2"
   },
   "scripts": {
-    "start": "react-scripts start",    
-    "build": "CI= react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
@@ -25,7 +25,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  
+  "homepage": "https://clever-boyd-7aff23.netlify.app/",
   "browserslist": [
     ">0.2%",
     "not dead",
