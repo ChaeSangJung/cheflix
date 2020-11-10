@@ -378,8 +378,8 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
     },
   ]
 
-  // const {currentItem, changeItem} = useTabs(0, isMovie ? movies : tvShowes);  
-  // const [active, setActivity] =useState(1);
+  const {currentItem, changeItem} = useTabs(0, isMovie ? movies : tvShowes);  
+  const [active, setActivity] =useState(1);
 
   return (
     loading ?  
@@ -485,7 +485,7 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
         </WrapSeasons>
         }
 
-        {/* <WrapTabsContent>
+        <WrapTabsContent>
         <>
           {isMovie ? (
               <>
@@ -531,7 +531,7 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
             )
           }
         </>
-        </WrapTabsContent> */}
+        </WrapTabsContent>
       </Container>
     
   );
@@ -543,7 +543,10 @@ function DetailPresenter ({ result, loading, error, isMovie, imdb_id, casts }) {
 DetailPresenter.propTypes = {
   result: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
+  isMovie : PropTypes.bool, 
+  imdb_id: PropTypes.string, 
+  casts : PropTypes.object
 };
 
 export default DetailPresenter;
