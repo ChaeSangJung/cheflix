@@ -197,7 +197,7 @@ const OuterCast = styled.div`
 const WrapCast = styled.div``;
 const BoxCastImage = styled.div`
   width: 100%;
-  height: 190px;
+  height: 210px;
   img {
     width: 100%;
     height: 100%;
