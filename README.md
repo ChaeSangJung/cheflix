@@ -31,3 +31,9 @@ Learning React and ES6 by building a Movie Discovery App.
 # Preview:
 
 Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
+
+# add late:
+- [ ] Now playing : with swiper
+- [ ] Upcoming, Top Rated (TV), Popular (TV, X), Airing Today (TV) : list more page with infinite scrolling
+- [ ] seasons and creators pop-up
+- [ ] search bar with redux
