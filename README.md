@@ -35,5 +35,5 @@ Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
 # add late:
 - [ ] Now playing : with swiper
 - [ ] Upcoming, Top Rated (TV), Popular (TV, X), Airing Today (TV) : list more page with infinite scrolling
-- [ ] seasons and creators pop-up
+- [ ] seasons and creators pop-up (use useEffect with dependency, ex) if pop-up btn click, state isVisible replaces true or false, setting dependency is isVisible )
 - [ ] search bar with redux
