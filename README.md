@@ -4,10 +4,10 @@ Learning React and ES6 by building a Movie Discovery App.
 
 ## Screens
 
-- [ ] Home
-- [ ] TV Shows
-- [ ] Search
-- [ ] Detail
+- [x] Home
+- [x] TV Shows
+- [x] Search
+- [x] Detail
 
 ## API Verbs
 
@@ -33,7 +33,9 @@ Learning React and ES6 by building a Movie Discovery App.
 Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
 
 # add late:
+- [ ] hooks refactoring all containers.js and searchContainers.js
 - [ ] Now playing : with swiper
 - [ ] Upcoming, Top Rated (TV), Popular (TV, X), Airing Today (TV) : list more page with infinite scrolling
+- [ ] Upcoming, Top Rated (TV), Popular (TV, X), Airing Today (TV) : slect one add a list more button
 - [ ] seasons and creators pop-up (use useEffect with dependency, ex) if pop-up btn click, state isVisible replaces true or false, setting dependency is isVisible )
 - [ ] search bar with redux
