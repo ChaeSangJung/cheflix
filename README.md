@@ -39,3 +39,4 @@ Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
 - [ ] Upcoming, Top Rated (TV), Popular (TV, X), Airing Today (TV) : slect one add a list more button
 - [ ] seasons and creators pop-up (use useEffect with dependency, ex) if pop-up btn click, state isVisible replaces true or false, setting dependency is isVisible )
 - [ ] search bar with redux
+- [ ] [making skeleton screen](https://unordinarydays.tistory.com/184)
