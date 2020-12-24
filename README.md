@@ -40,3 +40,4 @@ Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
 - [ ] seasons and creators pop-up (use useEffect with dependency, ex) if pop-up btn click, state isVisible replaces true or false, setting dependency is isVisible )
 - [ ] search bar with redux
 - [ ] [making skeleton screen](https://unordinarydays.tistory.com/184)
+- [ ] TV season swiper
