@@ -19,7 +19,7 @@ const HomeContainer = () => {
     }
   };
 
-  const LoadPages = async (target) => {
+  const LoadPages = async () => {
     const {
       data: { results: nowPlaying },
     } = await moviesApi.nowPlaying();
