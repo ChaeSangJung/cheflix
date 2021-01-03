@@ -1,47 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TVPresenter from "./TVPresenter";
 import { tvApi } from "../../api";
 
-export default class extends React.Component {
-  state = {
-    topRated: null,
-    popular: null,
-    airingToday: null,
-    loading: true,
-    error: null
-  };
+const TVContainer = () => {
+  const [topRated, setTopRated] = useState([]);
+  const [popular, setPopular] = useState([]);
+  const [airingToday, setAiringToday] = useState([]);
+  const [loading, setLoading] = useState([]);
+  const [error, setError] = useState([]);
 
-  async componentDidMount() {
-    try {
-      const {
-        data: { results: topRated }
-      } = await tvApi.topRated();
-      const {
-        data: { results: popular }
-      } = await tvApi.popular();
-      const {
-        data: { results: airingToday }
-      } = await tvApi.airingToday();
-      this.setState({ topRated, popular, airingToday });
+  const LoadData = async () => {
+    try{
+      LoadPages();
     } catch {
-      this.setState({
-        error: "Can't find TV information."
-      });
+      setError("Can't find movie information.");
     } finally {
-      this.setState({ loading: false });
+      setLoading(false);
     }
   }
 
-  render() {
-    const { topRated, popular, airingToday, loading, error } = this.state;
-    return (
-      <TVPresenter
-        topRated={topRated}
-        popular={popular}
-        airingToday={airingToday}
-        loading={loading}
-        error={error}
-      />
-    );
+  const LoadPages = async () => {
+    const {
+      data: { results: topRated }
+    } = await tvApi.topRated();
+    const {
+      data: { results: popular }
+    } = await tvApi.popular();
+    const {
+      data: { results: airingToday }
+    } = await tvApi.airingToday();
+
+    setTopRated(topRated);
+    setPopular(popular);
+    setAiringToday(airingToday);
   }
+
+  useEffect(()=>{
+    LoadData();
+  }, [])
+
+
+
+  return (
+    <TVPresenter
+      topRated={topRated}
+      popular={popular}
+      airingToday={airingToday}
+      loading={loading}
+      error={error}
+    />
+  );
 }
+
+
+export default TVContainer;
