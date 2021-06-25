@@ -46,3 +46,7 @@ export const tvApi = {
   tvImdb: (id) => api.get(`tv/${id}/external_ids`),
   tvCredits: id => api.get(`tv/${id}/credits`),
 };
+
+export const crewApi = {
+  getPerson: id => api.get(`/person/${id}`),
+}
