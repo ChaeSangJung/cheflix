@@ -250,7 +250,7 @@ const DetailPresenter = ({ result, loading, isMovie, imdb_id, casts}) => {
         <OuterCast>
           {casts && casts.cast.length > 0 && 
             casts.cast.map(crew =>
-              <Casting crew={ crew }/>
+              <Casting key= {crew.id} crew={ crew }/>
           )}
         </OuterCast>
       },
