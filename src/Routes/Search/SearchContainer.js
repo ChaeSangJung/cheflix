@@ -9,7 +9,10 @@ const SearchContainer = () => {
   const [loading, setLoading] = useState(false);
   const [error,setError] = useState(null);
 
+  const [timer, setTimer] =useState(0); // debouncing timer
+
   const searchByTerm = async () => {
+    console.log(searchTerm)
     setLoading(true);
     try {
       const {
@@ -40,6 +43,18 @@ const SearchContainer = () => {
     
     setSearchTerm(value);
   };
+
+  const keyUpDebounce = () => {
+    if(timer) {
+      clearTimeout(timer);
+    }
+    const newTimer = setTimeout(async()=>{
+      if (searchTerm !== "") {
+        searchByTerm();
+      }
+    },1000);
+    setTimer(newTimer);
+  }
   return (
     <SearchPresenter 
       movieResults={movieResults} 
@@ -49,6 +64,7 @@ const SearchContainer = () => {
       searchTerm={searchTerm}
       updateTerm={updateTerm} 
       handleSubmit={handleSubmit}
+      keyUpDebounce={keyUpDebounce}
     />
   )
 }

@@ -29,7 +29,8 @@ const SearchPresenter = ({
   searchTerm,
   handleSubmit,
   error,
-  updateTerm
+  updateTerm,
+  keyUpDebounce
 }) => (
   <Container>
     <Helmet title="Search | Nomflix" />
@@ -38,6 +39,7 @@ const SearchPresenter = ({
         placeholder="Search Movies or TV Shows..."
         value={searchTerm}
         onChange={updateTerm}
+        onKeyUp={keyUpDebounce}
       />
     </Form>
     {loading ? (
@@ -53,7 +55,7 @@ const SearchPresenter = ({
                 imageUrl={movie.poster_path}
                 title={movie.original_title}
                 rating={movie.vote_average}
-                year={movie.release_date.substring(0, 4)}
+                year={movie.release_date ? movie.release_date.substring(0, 4) : false}
                 isMovie={true}
               />
             ))}
@@ -68,7 +70,7 @@ const SearchPresenter = ({
                 imageUrl={show.poster_path}
                 title={show.original_name}
                 rating={show.vote_average}
-                year={show.first_air_date.substring(0, 4)}
+                year={show.first_air_date ? show.first_air_date.substring(0, 4) : false}
               />
             ))}
           </Section>
