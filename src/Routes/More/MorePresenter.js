@@ -15,7 +15,7 @@ const MorePresenter = ({ loading, moreResult, moreLoading, onMorePage, isNow, is
     return (        
         <Container>
             <Helmet 
-                title = {`${isNow ? "Now Playing" : isUpcoming ? "Upcoming Movies" : isPopular ? "Popular" : null}{" "}| Nomflix`}
+                title = {`${isNow ? "Now Playing" : isUpcoming ? "Upcoming Movies" : isPopular ? "Popular" : null} | Nomflix`}
             />
             {loading && (<Loader />)}
             
