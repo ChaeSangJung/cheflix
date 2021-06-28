@@ -13,9 +13,7 @@ const Container = styled.div`
 
 const TVPresenter = ({ topRated, popular, airingToday, loading, error }) => (
   <>
-    <Helmet>
-      <title>TV Shows | Nomflix</title>
-    </Helmet>
+    <Helmet title="TV Shows | Nomflix" />
     {loading ? (
       <Loader />
     ) : (
@@ -73,7 +71,8 @@ TVPresenter.propTypes = {
   popular: PropTypes.array,
   airingToday: PropTypes.array,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
+  year: PropTypes.string,
 };
 
 export default TVPresenter;

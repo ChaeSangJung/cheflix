@@ -237,13 +237,16 @@ const TextSasonName = styled.p`
 `;
 
 const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) => {
+  let movies = [];
+  let tvShowes =[];
 
-  const movies = [
-    {
-      id: 1,
-      tabs: "Cast",
-      content: 
-      <OuterCast>
+  if(!loading) {
+    movies = [
+      {
+        id: 1,
+        tabs: "Cast",
+        content: 
+        <OuterCast>
         {casts && casts.cast.length > 0 && 
           casts.cast.map(crew =>
             <WrapCast key={crew.credit_id}>
@@ -261,150 +264,147 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
             </WrapCast>
         )}
       </OuterCast>
-    },
-    {
-      id: 2,
-      tabs: "Videos",
-      content:
-      <WrapVideoOuter>
-        {result && result.videos.results.length > 0 &&
-          result.videos.results.map(i => i.site === 'YouTube' ?
-              <WrapVideoInner key={i.id}>
-                <VideoComponets name={i.name} />
-                <WrapVideoFrame>
-                  <VideoFrame
-                    id={i.id}
-                    key={i.id}
-                    title={i.id}
-                    src={`https://www.youtube.com/embed/${i.key}`}
-                    allowFullScreen='allowFullScreen'
-                    frameBorder='0'
-                  />
-                </WrapVideoFrame>          
-              </WrapVideoInner>
-          : null)}
-        </WrapVideoOuter>
-    },
-    {
-      id: 3,
-      tabs: "Companies",
-      content: 
-      <ListCompany>
-        {result && result.production_companies.length > 0 &&
-          result.production_companies.map(company =>
-            <ItemCompany key={company.id}>
-              <BoxImages>
-                {company.logo_path ?
-                  <Images src={`https://image.tmdb.org/t/p/original/${company.logo_path}`} alt={company.name}/>
-                  :
-                  null
-                }
-              </BoxImages>
-              <TextCompany>{company.name}</TextCompany>
-            </ItemCompany>
-          )
-        }
-      </ListCompany>
-    }, 
-  ]
-
-  const tvShowes = [    
-    {
-      id: 1,
-      tabs: "Cast",
-      content: 
-      <OuterCast>
-        {casts && casts.cast.length > 0 && 
-          casts.cast.map(crew =>
-            <WrapCast key={crew.credit_id}>
-              <BoxCastImage>
-                {
-                  crew.profile_path ? 
-                    <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
-                    <img src={user} alt={crew.name}/>  
-                }
-              </BoxCastImage>
-              <div>
-                <TextCrewName>{crew.name}</TextCrewName>
-                <TextCharacterName>{crew.character}</TextCharacterName>
-              </div>
-            </WrapCast>
-        )}
-      </OuterCast>
-    },
-    {
-      id: 2,
-      tabs: "Videos",
-      content:
-      <WrapVideoOuter>
-        {result && result.videos.results.length > 0 &&
-          result.videos.results.map(i => i.site === 'YouTube' ?
-              <WrapVideoInner key={i.id}>
-                <VideoComponets name={i.name} type={i.type} />
-                <WrapVideoFrame>
-                  <VideoFrame
-                    id={i.id}
-                    key={i.id}
-                    title={i.id}
-                    src={`https://www.youtube.com/embed/${i.key}`}
-                    allowFullScreen='allowFullScreen'
-                    frameBorder='0'
-                  />
-                </WrapVideoFrame>          
-              </WrapVideoInner>
-          : null)}
-        </WrapVideoOuter>
-    },
-    {
-      id: 3,
-      tabs: "Companies",
-      content: 
-      <ListCompany>
-        {result && result.production_companies.length > 0 &&
-          result.production_companies.map(company =>
-            <ItemCompany key={company.id}>
-              <BoxImages>
-                {company.logo_path ?
-                  <Images src={`https://image.tmdb.org/t/p/original/${company.logo_path}`} alt={company.name}/>
-                  :
-                  null
-                }
-              </BoxImages>
-              <TextCompany>{company.name}</TextCompany>
-            </ItemCompany>
-          )
-        }
-      </ListCompany>
-    },
-  ]
+      },
+      {
+        id: 2,
+        tabs: "Videos",
+        content:
+        <WrapVideoOuter>
+          {result && result.videos.results.length > 0 &&
+            result.videos.results.map(i => i.site === 'YouTube' ?
+                <WrapVideoInner key={i.id}>
+                  <VideoComponets name={i.name} />
+                  <WrapVideoFrame>
+                    <VideoFrame
+                      id={i.id}
+                      key={i.id}
+                      title={i.id}
+                      src={`https://www.youtube.com/embed/${i.key}`}
+                      allowFullScreen='allowFullScreen'
+                      frameBorder='0'
+                    />
+                  </WrapVideoFrame>          
+                </WrapVideoInner>
+            : null)}
+          </WrapVideoOuter>
+      },
+      {
+        id: 3,
+        tabs: "Companies",
+        content: 
+        <ListCompany>
+          {result && result.production_companies.length > 0 &&
+            result.production_companies.map(company =>
+              <ItemCompany key={company.id}>
+                <BoxImages>
+                  {company.logo_path ?
+                    <Images src={`https://image.tmdb.org/t/p/original/${company.logo_path}`} alt={company.name}/>
+                    :
+                    null
+                  }
+                </BoxImages>
+                <TextCompany>{company.name}</TextCompany>
+              </ItemCompany>
+            )
+          }
+        </ListCompany>
+      }, 
+    ]
+    tvShowes = [
+      {
+        id: 1,
+        tabs: "Cast",
+        content: 
+        <OuterCast>
+          {casts && casts.cast.length > 0 && 
+            casts.cast.map(crew =>
+              <WrapCast key={crew.credit_id}>
+                <BoxCastImage>
+                  {
+                    crew.profile_path ? 
+                      <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
+                      <img src={user} alt={crew.name}/>  
+                  }
+                </BoxCastImage>
+                <div>
+                  <TextCrewName>{crew.name}</TextCrewName>
+                  <TextCharacterName>{crew.character}</TextCharacterName>
+                </div>
+              </WrapCast>
+          )}
+        </OuterCast>
+      },
+      {
+        id: 2,
+        tabs: "Videos",
+        content:
+        <WrapVideoOuter>
+          {result && result.videos.results.length > 0 &&
+            result.videos.results.map(i => i.site === 'YouTube' ?
+                <WrapVideoInner key={i.id}>
+                  <VideoComponets name={i.name} type={i.type} />
+                  <WrapVideoFrame>
+                    <VideoFrame
+                      id={i.id}
+                      key={i.id}
+                      title={i.id}
+                      src={`https://www.youtube.com/embed/${i.key}`}
+                      allowFullScreen='allowFullScreen'
+                      frameBorder='0'
+                    />
+                  </WrapVideoFrame>          
+                </WrapVideoInner>
+            : null)}
+          </WrapVideoOuter>
+      },
+      {
+        id: 3,
+        tabs: "Companies",
+        content: 
+        <ListCompany>
+          {result && result.production_companies.length > 0 &&
+            result.production_companies.map(company =>
+              <ItemCompany key={company.id}>
+                <BoxImages>
+                  {company.logo_path ?
+                    <Images src={`https://image.tmdb.org/t/p/original/${company.logo_path}`} alt={company.name}/>
+                    :
+                    null
+                  }
+                </BoxImages>
+                <TextCompany>{company.name}</TextCompany>
+              </ItemCompany>
+            )
+          }
+        </ListCompany>
+      },
+    ]
+  }
 
   const {currentItem, changeItem} = useTabs(0, isMovie ? movies : tvShowes);  
   const [active, setActivity] =useState(1);
 
 
   
-
   return (
     loading ?  
       <>
-        <Helmet>
-          <title>Loading | Nomflix</title>
-        </Helmet>
+        <Helmet
+              title= "Loading | Nomflix"
+        />
         <Loader />
       </>
     :
-    
-      <Container>
-        <Helmet>
-          <title>
-            {result.original_title ? result.original_title : result.original_name}{" "}
-            | Nomflix
-          </title>
-        </Helmet>
+    <Container>
+      <Helmet 
+        title = {`${result.original_title ? result.original_title : result.original_name}{" "}
+        | Nomflix`}
+      />
+          
 
-        <BannerDiv bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`} />        
+        <BannerDiv bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`} />
         <Content>
-          <Cover
+        <Cover
             bgImage={
               result.poster_path
                 ? `https://image.tmdb.org/t/p/original${result.poster_path}`
@@ -413,7 +413,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
           />
           <WrapData>
             <WrapTitle>
-              <TextTitle>                
+            <TextTitle>                
                 {result.original_title
                   ? result.original_title
                   : result.original_name}
@@ -431,7 +431,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
                 <GoImdb href={`https://www.imdb.com/title/${imdb_id}`} rel='noopener noreferrer' target='_blank'>IMDB</GoImdb>
               }
             </WrapTitle>
-            
+
             {result.status ? 
               <ItemContainer>
                 <TextStatus>{`${result.status}`}</TextStatus>
@@ -472,7 +472,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
             <Overview>{result.overview}</Overview>
           </WrapData>
         </Content>
-        
+
         {isMovie ? null :
         <WrapSeasons>
           {result && result.seasons.length > 0 &&
@@ -487,7 +487,6 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
           }
         </WrapSeasons>
         }
-
         <WrapTabsContent>
         <>
           {isMovie ? (
@@ -535,9 +534,8 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
           }
         </>
         </WrapTabsContent>
-      </Container>
-    
-  );
+    </Container>
+  )
 }
 
   

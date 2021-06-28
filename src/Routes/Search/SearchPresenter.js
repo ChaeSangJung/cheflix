@@ -32,9 +32,7 @@ const SearchPresenter = ({
   updateTerm
 }) => (
   <Container>
-    <Helmet>
-      <title>Search | Nomflix</title>
-    </Helmet>
+    <Helmet title="Search | Nomflix" />
     <Form onSubmit={handleSubmit}>
       <Input
         placeholder="Search Movies or TV Shows..."
@@ -94,7 +92,8 @@ SearchPresenter.propTypes = {
   searchTerm: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  updateTerm: PropTypes.func.isRequired
+  updateTerm: PropTypes.func.isRequired,
+  year: PropTypes.string,
 };
 
 export default SearchPresenter;

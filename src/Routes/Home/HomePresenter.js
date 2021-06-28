@@ -13,16 +13,13 @@ const Container = styled.div`
 
 const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
   <>
-    <Helmet>
-      <title>Movies | Nomflix</title>
-    </Helmet>
+    <Helmet title="Movies | Nomflix"/>
+      
     {loading ? (
       <Loader />
     ) : (
       <Container>
-        <Helmet>
-          <title>Movies | Nomflix</title>
-        </Helmet>
+        <Helmet title="Movies | Nomflix" />
         {nowPlaying && nowPlaying.length > 0 && (
           <Section title="Now Playing">
             {nowPlaying.map(movie => (
@@ -80,6 +77,7 @@ HomePresenter.propTypes = {
   upcoming: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
+  year: PropTypes.string,
 };
 
 export default HomePresenter;
