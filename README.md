@@ -35,6 +35,7 @@ Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
 # add late:
 - [X] hooks refactoring all containers.js
 - [X] hooks refactoring searchContainers.js
+- [X] searching with debouncing
 - [ ] Now playing : with swiper
 - [ ] Upcoming, Top Rated (TV), Popular (TV, X), Airing Today (TV) : list more page with infinite scrolling
 - [ ] Upcoming, Top Rated (TV), Popular (TV, X), Airing Today (TV) : slect one add a list more button
