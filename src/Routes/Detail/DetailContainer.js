@@ -9,7 +9,7 @@ const DetailContainer = ({location, match, history}) => {
 
   const [result, setResult] = useState([]);
   const [casts, setCasts] = useState([]);
-  const [error, setError] = useState(null);
+  
   const [imdb_id, setImdb_id] = useState(null);
   const [loading, setLoading] = useState(true);  
   const [isMovie] = useState(pathname.includes("/movie/"));
@@ -37,7 +37,7 @@ const DetailContainer = ({location, match, history}) => {
         setCasts(cast);
       }
     } catch {
-      setError("Can't find anything");
+      console.log("Can't find anything");
     } finally {
       setLoading(false);
     }
