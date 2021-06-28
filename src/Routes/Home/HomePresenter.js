@@ -21,8 +21,8 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
       <Container>
         <Helmet title="Movies | Nomflix" />
         {nowPlaying && nowPlaying.length > 0 && (
-          <Section title="Now Playing">
-            {nowPlaying.map(movie => (
+          <Section title="Now Playing" link="/now_more" isHome={true}>
+            {nowPlaying.map((movie) => (
               <Poster
                 key={movie.id}
                 id={movie.id}
