@@ -1,57 +1,57 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import DetailPresenter from "./DetailPresenter";
 import { moviesApi, tvApi } from "../../api";
 
-const DetailContainer = ({location, match, history}) => {
-  const { pathname } = location;
-  const { params : { id } } = match;
-  const { push } = history;
-  
-  const [result, setResult] = useState([]);
-  const [casts, setCasts] = useState([]);
-  const [error, setError] = useState(null);
-  const [imdb_id, setImdb_id] = useState(null);
-  const [loading, setLoading] = useState(true);  
-  const [isMovie] = useState(pathname.includes("/movie/"));
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
+    const {
+      location: { pathname }
+    } = props;
+    this.state = {
+      result: null,
+      error: null,
+      imdb_id: null,
+      loading: true,
+      isMovie: pathname.includes("/movie/")
+    };
+  }
 
-  const loadData = async () => {
-    const parseId = parseInt(id);
-    if (isNaN(parseId)){
+  async componentDidMount() {
+    const {
+      match: {
+        params: { id }
+      },
+      history: { push }
+    } = this.props;
+    const { isMovie } = this.state;
+    const parsedId = parseInt(id);
+    if (isNaN(parsedId)) {
       return push("/");
     }
-
+    
     try {
-      if(isMovie) {
-        const { data : results } = await moviesApi.movieDetail(parseId);
-        const { data: cast } = await moviesApi.movieCredits(parseId);
+      if (isMovie) {
+        const { data: result } = await moviesApi.movieDetail(parsedId);
+        const { data: casts  } = await moviesApi.movieCredits(parsedId);
 
-        setResult(results);
-        setCasts(cast);
+        return this.setState({ result, casts })
       } else {
-        const { data: results } = await tvApi.showDetail(parseId);
-        const { data: { imdb_id } } = await tvApi.tvImdb(parseId);
-        const { data: cast } = await tvApi.tvCredits(parseId);
+        const { data: result } = await tvApi.showDetail(parsedId);
+        const { data: { imdb_id } } = await tvApi.tvImdb(parsedId);
+        const { data: casts  } = await tvApi.tvCredits(parsedId)
         
-        setResult(results);
-        setImdb_id(imdb_id);
-        setCasts(cast);
+        return this.setState({ result, imdb_id, casts })
       }
     } catch {
-      setError("Can't find anything");
+      this.setState({ error: "Can't find anything." });
     } finally {
-      setLoading(false);
+      this.setState({ loading: false });
     }
   }
-  
-  useEffect(() => {
-    loadData();
-  },[]);
 
-  
-
-  return (
-    <DetailPresenter result={result} loading={loading} isMovie={isMovie} imdb_id={imdb_id} casts={casts}/>
-  )
+  render() {
+    const { result, error, loading, isMovie, imdb_id, casts } = this.state
+    return <DetailPresenter result={result} error={error} loading={loading} isMovie={isMovie} imdb_id={imdb_id} casts={casts} />;
+  }
 }
-
-export default DetailContainer;

@@ -79,7 +79,7 @@ HomePresenter.propTypes = {
   popular: PropTypes.array,
   upcoming: PropTypes.array,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
 };
 
 export default HomePresenter;
