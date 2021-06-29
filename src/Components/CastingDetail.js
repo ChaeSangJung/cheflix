@@ -14,7 +14,6 @@ const WrapCast = styled.div`
         margin-top: 20px;
     }
 `;
-
 const BoxCastImage = styled.div`
     overflow: hidden;
     width: 100%;  
@@ -23,7 +22,18 @@ const BoxCastImage = styled.div`
         height: 100%;
     }
 `;
-
+const TextCrewName = styled.p`
+  margin-top: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+`;
+const TextCharacterName = styled.p`
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+`;
 const CastingDetail = ({ crew }) => {
     console.log(crew)
     return (
@@ -35,6 +45,10 @@ const CastingDetail = ({ crew }) => {
                     <img src={user} alt={crew.name}/>  
                 }
             </BoxCastImage>
+            <div>
+                <TextCrewName>{crew.name}</TextCrewName>
+                <TextCharacterName>{crew.character}</TextCharacterName>
+            </div>
         </WrapCast>
     )
 }

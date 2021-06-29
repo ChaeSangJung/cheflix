@@ -1,8 +1,6 @@
-import React, {useEffect, useState } from "react";
-import { crewApi } from "../api";
+import React from "react";
 import CastingDetail from "./CastingDetail";
 import styled from "styled-components";
-import user from './images/user.png';
 
 const OuterCast = styled.div`
   padding-top: 60px;
