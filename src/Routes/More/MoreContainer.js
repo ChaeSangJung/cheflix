@@ -12,6 +12,7 @@ const NowMoreContainer = ({location}) => {
     const [loading, setLoading] = useState(true);
     const [moreLoading, setMoreLoading] = useState(false);    
     const [page, setPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(0);
     
     const LoadData = async() => {
         try {
@@ -20,6 +21,7 @@ const NowMoreContainer = ({location}) => {
                 const {
                     data: { results: newNow, total_pages },
                 } = await moviesApi.nowPlayMore(page);
+                setTotalPage(total_pages);
                 if(page <= total_pages) {
                     const uniqueMovies = [...moreResult, ...newNow]
                     setMore(uniqueMovies);
@@ -37,8 +39,9 @@ const NowMoreContainer = ({location}) => {
 
     const fetchInitial = async() => {
         try {
-            const {data : {results}} = await moviesApi.nowPlayMore(1);
+            const {data : {results, total_pages}} = await moviesApi.nowPlayMore(1);
             setMore(results);
+            setTotalPage(total_pages);
         } catch {
             console.log("Can't find movie information.");
         } finally {
@@ -66,6 +69,8 @@ const NowMoreContainer = ({location}) => {
             isNow={isNow}
             isUpcoming={isUpcoming}
             isPopular={isPopular}
+            page={page}
+            totalPage={totalPage}
         />
     )
 }

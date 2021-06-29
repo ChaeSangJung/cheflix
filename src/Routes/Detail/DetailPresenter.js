@@ -241,6 +241,8 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
   let tvShowes =[];
 
   if(!loading) {
+    console.log(casts)
+    console.log(result)
     movies = [
       {
         id: 1,
@@ -397,12 +399,16 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
     :
     <Container>
       <Helmet 
-        title = {`${result.original_title ? result.original_title : result.original_name}{" "}
-        | Nomflix`}
+        title = {`${result.original_title ? result.original_title : result.original_name} | Nomflix`}
       />
           
 
-        <BannerDiv bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`} />
+        <BannerDiv 
+          bgImage={
+            result.backdrop_path ? `https://image.tmdb.org/t/p/original${result.backdrop_path}`
+            : null
+          } 
+        />
         <Content>
         <Cover
             bgImage={

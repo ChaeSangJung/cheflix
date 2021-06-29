@@ -11,7 +11,7 @@ const Container = styled.div`
   padding: 20px;
 `;
 
-const MorePresenter = ({ loading, moreResult, moreLoading, onMorePage, isNow, isUpcoming, isPopular }) => {
+const MorePresenter = ({ loading, moreResult, moreLoading, onMorePage, isNow, isUpcoming, isPopular, page, totalPage }) => {
     return (        
         <Container>
             <Helmet 
@@ -31,11 +31,15 @@ const MorePresenter = ({ loading, moreResult, moreLoading, onMorePage, isNow, is
                             title={movie.original_title}
                             rating={movie.vote_average}
                             year={movie.release_date.substring(0, 4)}
-                            isMovie={false}
+                            isMovie={true}
                         />
                     ))
                 }
-                <button onClick={onMorePage}>++</button>
+                <button onClick={onMorePage}>
+                    More+<br/>
+                    <span>{`${isNow ? "Now Playing" : isUpcoming ? "Upcoming Movies" : isPopular ? "Popular" : null}`}</span><br/>
+                    <span>{page}/{totalPage}</span>
+                </button>
                 </Section>    
             )}
             
