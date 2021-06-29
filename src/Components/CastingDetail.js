@@ -1,33 +1,41 @@
 import React from "react";
 import styled from "styled-components";
+import user from './images/user.png';
 
-const WrapDetail = styled.div`
-    font-size: 14px;
-    color: #333;
-`
-const Btn = styled.button`
-    font-size: 14px;
-    color: #333;
-`
+const WrapCast = styled.div`
+    position: relative;
+    display: inline-block;
+    width: calc((100% - 160px)/9);
+    margin-left: 20px;
+    &:nth-child(9n-8) {
+        margin-left: 0;
+    }
+    &:nth-child(n+9) {
+        margin-top: 20px;
+    }
+`;
 
-const CastingDetail = ({ crewLoading, persons, setIsClick }) => {
+const BoxCastImage = styled.div`
+    overflow: hidden;
+    width: 100%;  
+    img {
+        width: 100%;
+        height: 100%;
+    }
+`;
+
+const CastingDetail = ({ crew }) => {
+    console.log(crew)
     return (
-        crewLoading ? null : (
-            <WrapDetail>
-                {persons.name}
-                {persons.biography}
-                {persons.birthday}
-                {persons.deathday}
-                {persons.gender} 
-                {/* 1 female */}
-                {persons.homepage}
-                {persons.known_for_department}
-                {persons.place_of_birth}
-                {persons.popularity}
-                {persons.profile_path}
-                <Btn onClick={()=>{setIsClick(false)}}>x</Btn>
-            </WrapDetail>
-        )
+        <WrapCast>
+            <BoxCastImage>
+                {
+                crew.profile_path ? 
+                    <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
+                    <img src={user} alt={crew.name}/>  
+                }
+            </BoxCastImage>
+        </WrapCast>
     )
 }
 

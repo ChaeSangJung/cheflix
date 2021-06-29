@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import VideoComponets from "Components/VideoComponets";
+import CastingContainer from "../../Components/CastingContainer";
 
 import { useTabs } from "../../hooks";
 import img_star from './images/rating_star.png';
@@ -104,6 +105,7 @@ const TabWrapContent=styled.div`
   position: relative;
   padding-bottom: 80px;
   padding-left: 20px;
+  padding-right: 20px;
   background-color: #f8f8f8;
   box-sizing: border-box;
 `;
@@ -248,24 +250,25 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
         id: 1,
         tabs: "Cast",
         content: 
-        <OuterCast>
-        {casts && casts.cast.length > 0 && 
-          casts.cast.map(crew =>
-            <WrapCast key={crew.credit_id}>
-              <BoxCastImage>
-                {
-                  crew.profile_path ? 
-                    <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
-                    <img src={user} alt={crew.name}/>  
-                }
-              </BoxCastImage>
-              <div>
-                <TextCrewName>{crew.name}</TextCrewName>
-                <TextCharacterName>{crew.character}</TextCharacterName>
-              </div>
-            </WrapCast>
-        )}
-      </OuterCast>
+        <CastingContainer casts={casts}/>
+      //   <OuterCast>
+      //   {casts && casts.cast.length > 0 && 
+      //     casts.cast.map(crew =>
+      //       <WrapCast key={crew.credit_id}>
+      //         <BoxCastImage>
+      //           {
+      //             crew.profile_path ? 
+      //               <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
+      //               <img src={user} alt={crew.name}/>  
+      //           }
+      //         </BoxCastImage>
+      //         <div>
+      //           <TextCrewName>{crew.name}</TextCrewName>
+      //           <TextCharacterName>{crew.character}</TextCharacterName>
+      //         </div>
+      //       </WrapCast>
+      //   )}
+      // </OuterCast>
       },
       {
         id: 2,
