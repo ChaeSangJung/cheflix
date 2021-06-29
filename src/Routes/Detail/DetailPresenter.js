@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import VideoComponets from "Components/VideoComponets";
 import CastingContainer from "../../Components/CastingContainer";
+import SeasonContainer from "../../Components/SeasonContainer"
 
 import { useTabs } from "../../hooks";
 import img_star from './images/rating_star.png';
@@ -223,21 +224,6 @@ const WrapSeasons = styled.div`
   grid-template-columns: repeat(auto-fill,200px);
   grid-gap: 20px;
 `;
-const BoxSeasons = styled.div``;
-const BoxPosterSeasons = styled.div`
-  overflow: hidden;
-  img {
-    width: auto;
-    height: 300px;
-  }
-`;
-const TextSasonName = styled.p`
-  margin-top: 12px;
-  font-size: 14px;
-  color: #fff;
-  text-align: left;
-`;
-
 const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) => {
   let movies = [];
   let tvShowes =[];
@@ -251,24 +237,6 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
         tabs: "Cast",
         content: 
         <CastingContainer casts={casts}/>
-      //   <OuterCast>
-      //   {casts && casts.cast.length > 0 && 
-      //     casts.cast.map(crew =>
-      //       <WrapCast key={crew.credit_id}>
-      //         <BoxCastImage>
-      //           {
-      //             crew.profile_path ? 
-      //               <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
-      //               <img src={user} alt={crew.name}/>  
-      //           }
-      //         </BoxCastImage>
-      //         <div>
-      //           <TextCrewName>{crew.name}</TextCrewName>
-      //           <TextCharacterName>{crew.character}</TextCharacterName>
-      //         </div>
-      //       </WrapCast>
-      //   )}
-      // </OuterCast>
       },
       {
         id: 2,
@@ -475,7 +443,8 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
                 
               </Item>
               <Item>
-                {result.runtime ? result.runtime : result.episode_run_time[0]} min
+                {isMovie ? result.runtime : result.episode_run_time[0]} min
+                {/* {result.runtime ? result.runtime : result.episode_run_time[0]} min */}
               </Item>
             </ItemContainer>
             <Overview>{result.overview}</Overview>
@@ -484,7 +453,12 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
 
         {isMovie ? null :
         <WrapSeasons>
-          {result && result.seasons.length > 0 &&
+          <SeasonContainer 
+            id={result.id} 
+            title={result.original_title ? result.original_title : result.original_name}  
+            result={result}
+          />
+          {/* {result && result.seasons.length > 0 &&
             result.seasons.map(season =>
               <BoxSeasons key={season.id}>
                 <BoxPosterSeasons>
@@ -493,7 +467,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
                 <TextSasonName>{season.name && season.name > 10 ? `${season.name.substring(0, 10)}...` : season.name}</TextSasonName>
               </BoxSeasons>
             )
-          }
+          } */}
         </WrapSeasons>
         }
         <WrapTabsContent>

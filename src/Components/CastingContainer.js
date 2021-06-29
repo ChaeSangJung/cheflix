@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CastingDetail from "./CastingDetail";
 import CrewDetail from "./CrewDetail";
 import styled from "styled-components";
-import { crewApi } from "../api"
+import { crewApi } from "../api";
 import useAsync from '../hooks/useAsync';
 
 const OuterCast = styled.div`
