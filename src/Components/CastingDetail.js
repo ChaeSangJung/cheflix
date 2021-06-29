@@ -7,10 +7,11 @@ const WrapCast = styled.div`
     display: inline-block;
     width: calc((100% - 160px)/9);
     margin-left: 20px;
+    vertical-align: top;
     &:nth-child(9n-8) {
         margin-left: 0;
     }
-    &:nth-child(n+9) {
+    &:nth-child(n+10) {
         margin-top: 20px;
     }
 `;
@@ -34,11 +35,11 @@ const TextCharacterName = styled.p`
   font-weight: 400;
   color: #333;
 `;
-const CastingDetail = ({ crew }) => {
-    console.log(crew)
+const CastingDetail = ({ crew, refetch }) => {
+    // console.log(crew)
     return (
         <WrapCast>
-            <BoxCastImage>
+            <BoxCastImage onClick={()=>{refetch(crew.id)}}>
                 {
                 crew.profile_path ? 
                     <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
