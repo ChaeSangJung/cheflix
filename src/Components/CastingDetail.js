@@ -36,7 +36,6 @@ const TextCharacterName = styled.p`
   color: #333;
 `;
 const CastingDetail = ({ crew, refetch }) => {
-    // console.log(crew)
     return (
         <WrapCast>
             <BoxCastImage onClick={()=>{refetch(crew.id)}}>

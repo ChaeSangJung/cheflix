@@ -47,13 +47,11 @@ const CastingContainer = ({casts}) => {
             <OuterCast>
                 {casts && casts.cast.length > 0 && 
                     casts.cast.map((crew) =>(
-                        <>
-                            <CastingDetail 
-                                key={crew.credit_id} 
-                                crew={crew} 
-                                refetch={refetch}
-                            />
-                        </>
+                        <CastingDetail 
+                            key={crew.credit_id} 
+                            crew={crew} 
+                            refetch={refetch}
+                        />
                     ))
                 }
             </OuterCast>
