@@ -9,7 +9,6 @@ import SeasonContainer from "../../Components/SeasonContainer"
 
 import { useTabs } from "../../hooks";
 import img_star from './images/rating_star.png';
-import user from './images/user.png';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -191,33 +190,6 @@ const TextCompany = styled.span`
   line-height: 20px;
   vertical-align: top;
 `;
-const OuterCast = styled.div`  
-  display: grid;
-  padding-top: 60px;
-  grid-template-columns: repeat(auto-fill,140px);
-  grid-gap: 20px;
-`;
-const WrapCast = styled.div``;
-const BoxCastImage = styled.div`
-  width: 100%;
-  height: 210px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-const TextCrewName = styled.p`
-  margin-top: 7px;
-  font-size: 15px;
-  font-weight: 700;
-  color: #333;
-`;
-const TextCharacterName = styled.p`
-  margin-top: 5px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #333;
-`;
 const WrapSeasons = styled.div`
   display: grid;
   padding-top: 60px;
@@ -235,8 +207,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
       {
         id: 1,
         tabs: "Cast",
-        content: 
-        <CastingContainer casts={casts}/>
+        content: <CastingContainer casts={casts}/>
       },
       {
         id: 2,
@@ -287,25 +258,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
       {
         id: 1,
         tabs: "Cast",
-        content: 
-        <OuterCast>
-          {casts && casts.cast.length > 0 && 
-            casts.cast.map(crew =>
-              <WrapCast key={crew.credit_id}>
-                <BoxCastImage>
-                  {
-                    crew.profile_path ? 
-                      <img src={`https://image.tmdb.org/t/p/original/${crew.profile_path}`} alt={crew.name}/> :
-                      <img src={user} alt={crew.name}/>  
-                  }
-                </BoxCastImage>
-                <div>
-                  <TextCrewName>{crew.name}</TextCrewName>
-                  <TextCharacterName>{crew.character}</TextCharacterName>
-                </div>
-              </WrapCast>
-          )}
-        </OuterCast>
+        content: <CastingContainer casts={casts}/>
       },
       {
         id: 2,
@@ -458,16 +411,6 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
             title={result.original_title ? result.original_title : result.original_name}  
             result={result}
           />
-          {/* {result && result.seasons.length > 0 &&
-            result.seasons.map(season =>
-              <BoxSeasons key={season.id}>
-                <BoxPosterSeasons>
-                  <img src={`https://image.tmdb.org/t/p/w500${season.poster_path}`} alt={season.name}/>
-                </BoxPosterSeasons>
-                <TextSasonName>{season.name && season.name > 10 ? `${season.name.substring(0, 10)}...` : season.name}</TextSasonName>
-              </BoxSeasons>
-            )
-          } */}
         </WrapSeasons>
         }
         <WrapTabsContent>

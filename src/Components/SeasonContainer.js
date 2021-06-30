@@ -7,7 +7,12 @@ const SeasonContainer = ({title, id, result}) => {
         <>
             {result && result.seasons.length > 0 &&
                 result.seasons.map((season) =>(
-                    <SeasonDetail title={title} id={id} season={season}/>
+                    <SeasonDetail 
+                        key={season.id}
+                        title={title} 
+                        id={id} 
+                        season={season}
+                    />
                 ))
             }
         </>

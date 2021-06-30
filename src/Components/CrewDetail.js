@@ -26,7 +26,7 @@ const CrewDetail = ({crewInfoes, setIsPop}) => {
                     {
                         crewInfoes.profile_path ? 
                             <img src={`https://image.tmdb.org/t/p/original/${crewInfoes.profile_path}`} alt={crewInfoes.name}/> :
-                            <img src={user} alt={crewInfoes.name}/>  
+                            <img src={user} alt={`no_image_${crewInfoes.name}`}/>  
                     }
                 </BoxImg>
                 <span>{crewInfoes.name}</span>

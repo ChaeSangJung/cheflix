@@ -21,7 +21,7 @@ const TextSasonName = styled.p`
 
 const SeasonDetail = ({title, id, season}) => {
     return (
-        <BoxSeasons key={season.id}>
+        <BoxSeasons>
             <BoxPosterSeasons>
                 <img src={`https://image.tmdb.org/t/p/w500${season.poster_path}`} alt={season.name}/>
             </BoxPosterSeasons>
