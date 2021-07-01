@@ -12,7 +12,7 @@ const SearchContainer = () => {
   const [timer, setTimer] =useState(0); // debouncing timer
 
   const searchByTerm = async () => {
-    console.log(searchTerm)
+    // console.log(searchTerm)
     setLoading(true);
     try {
       const {
@@ -21,6 +21,7 @@ const SearchContainer = () => {
       const {
         data: { results: tvResults }
       } = await tvApi.search(searchTerm);
+      
       setMovieResults(movieResults);
       setTvResults(tvResults, tvResults);
     } catch {
@@ -44,6 +45,7 @@ const SearchContainer = () => {
     setSearchTerm(value);
   };
 
+  // debouncing
   const keyUpDebounce = () => {
     if(timer) {
       clearTimeout(timer);

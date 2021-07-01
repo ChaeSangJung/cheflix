@@ -6,6 +6,7 @@ import Loader from "Components/Loader";
 import VideoComponets from "Components/VideoComponets";
 import CastingContainer from "../../Components/CastingContainer";
 import SeasonContainer from "../../Components/SeasonContainer"
+import VideoContainer from "../../Components/VideoContainer";
 
 import { useTabs } from "../../hooks";
 import img_star from './images/rating_star.png';
@@ -201,8 +202,6 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
   let tvShowes =[];
 
   if(!loading) {
-    console.log(casts)
-    console.log(result)
     movies = [
       {
         id: 1,
@@ -212,25 +211,24 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
       {
         id: 2,
         tabs: "Videos",
-        content:
-        <WrapVideoOuter>
-          {result && result.videos.results.length > 0 &&
-            result.videos.results.map(i => i.site === 'YouTube' ?
-                <WrapVideoInner key={i.id}>
-                  <VideoComponets name={i.name} />
-                  <WrapVideoFrame>
-                    <VideoFrame
-                      id={i.id}
-                      key={i.id}
-                      title={i.id}
-                      src={`https://www.youtube.com/embed/${i.key}`}
-                      allowFullScreen='allowFullScreen'
-                      frameBorder='0'
-                    />
-                  </WrapVideoFrame>          
-                </WrapVideoInner>
-            : null)}
-          </WrapVideoOuter>
+        content: <VideoContainer result={result} />
+        // <WrapVideoOuter>
+        //   {result && result.videos.results.length > 0 &&
+        //     result.videos.results.map(i => i.site === 'YouTube' ?
+        //         <WrapVideoInner key={i.id}>
+        //           <VideoComponets name={i.name} />
+        //           <WrapVideoFrame>
+        //             <VideoFrame
+        //               id={i.id}
+        //               title={i.id}
+        //               src={`https://www.youtube.com/embed/${i.key}`}
+        //               allowFullScreen='allowFullScreen'
+        //               frameBorder='0'
+        //             />
+        //           </WrapVideoFrame>          
+        //         </WrapVideoInner>
+        //     : null)}
+        //   </WrapVideoOuter>
       },
       {
         id: 3,

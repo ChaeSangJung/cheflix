@@ -41,7 +41,7 @@ const CastingContainer = ({casts}) => {
     if(error){
         console.log("error");
     }
-    console.log(crewInfoes)
+    
     return (
         <> 
             <OuterCast>

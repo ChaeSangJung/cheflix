@@ -141,7 +141,7 @@ const CrewDetail = ({crewInfoes, setIsPop}) => {
                                             : null
                                         }
                                         &nbsp;
-                                        {!crewInfoes.deathday ? `(${old}years)`: null}                                    
+                                        {!crewInfoes.deathday ? `(${old}years)`: null}
                                     </TextNames>
                                 </div>
                                 {crewInfoes.deathday ? 

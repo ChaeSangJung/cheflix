@@ -9,6 +9,15 @@ const HomeContainer = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
+  const [nowSwipe, setNowSwipe] = useState({
+    "title" : "",
+    "arr" : []
+  });
+  const [upSwipe, setUpSwipe] = useState({
+    "title" : "",
+    "arr" : []
+  })
+
   const LoadData = async () => {
     try {
       LoadPages();
@@ -32,6 +41,25 @@ const HomeContainer = () => {
     setNow(nowPlaying);
     setUpcoming(upcoming);
     setPopular(popular);
+
+    if(nowPlaying && nowPlaying.length > 0) {
+      const now_my = nowPlaying.filter((now) => now.vote_average >= 8.4);
+      setNowSwipe({
+        "title" : "Now Playing",
+        "arr" : now_my
+      });
+    }
+
+    if(upcoming && upcoming.length > 0) {
+      const up_temp = upcoming.slice(0,2);      
+      const up_Black_Widow = upcoming.filter((up) => up.title.includes("Black Widow"))
+      let up_my = [...up_Black_Widow, ...up_temp];
+      
+      setUpSwipe({
+        "title" : "Upcoming",
+        "arr" : up_my
+      })
+    }
   };
 
   useEffect(() => {
@@ -45,6 +73,8 @@ const HomeContainer = () => {
         popular={popular}
         error={error}
         loading={loading}
+        nowSwipe={nowSwipe}
+        upSwipe={upSwipe}
       />
   );
 }

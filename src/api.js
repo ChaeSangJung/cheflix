@@ -52,4 +52,10 @@ export const tvApi = {
 
 export const crewApi = {
   getPerson: id => api.get(`/person/${id}`),
+  search: term =>
+    api.get("/search/person" , {
+      params: {
+        query: encodeURIComponent(term)
+      }
+    }), 
 }
