@@ -467,11 +467,11 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,
+  casts : PropTypes.object,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
   isMovie : PropTypes.bool, 
-  imdb_id: PropTypes.string, 
-  casts : PropTypes.object
+  imdb_id: PropTypes.string,
 };
 
 export default DetailPresenter;

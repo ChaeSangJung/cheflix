@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 
@@ -39,7 +40,7 @@ const Dim = styled.div`
     width: 164px;
     height: 240px;
     background: linear-gradient(90deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.2) 20%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.8) 80%, rgba(0,0,0,1) 100%);
-    top: 70px;
+    bottom: 33px;
     right: 0;
 `
 
@@ -97,6 +98,10 @@ const VideoContainer = ({result}) => {
             )}
         </WrapVideoVisual>
     )
+}
+
+VideoContainer.propTypes = {
+    result : PropTypes.object,
 }
 
 export default React.memo(VideoContainer);

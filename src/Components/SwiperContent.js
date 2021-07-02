@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components"
 import {Link} from "react-router-dom";
 
@@ -74,6 +75,12 @@ const SwiperContent = ({content, title, isMovie}) => {
             </InnerWrap>
         </Wrap>
     )
+}
+
+SwiperContent.propTypes = {
+    content : PropTypes.object, 
+    title : PropTypes.string, 
+    isMovie : PropTypes.bool,
 }
 
 export default SwiperContent;

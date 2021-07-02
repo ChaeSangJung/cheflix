@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import user from './images/user.png';
 
 const WrapCast = styled.div`
@@ -51,6 +52,11 @@ const CastingDetail = ({ crew, refetch }) => {
             </div>
         </WrapCast>
     )
+}
+
+CastingDetail.propTypes = {
+    crew: PropTypes.object,
+    refetch: PropTypes.func
 }
 
 export default CastingDetail

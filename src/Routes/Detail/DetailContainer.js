@@ -7,8 +7,8 @@ const DetailContainer = ({location, match, history}) => {
   const { params : { id } } = match;
   const { push } = history;
 
-  const [result, setResult] = useState([]);
-  const [casts, setCasts] = useState([]);
+  const [result, setResult] = useState({});
+  const [casts, setCasts] = useState({});
   
   const [imdb_id, setImdb_id] = useState(null);
   const [loading, setLoading] = useState(true);  

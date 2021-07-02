@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import user from './images/user.png';
 
 const BoxPop = styled.div`
@@ -68,8 +69,6 @@ const WrapBio = styled.div`
     position: relative;
 `
 const CrewDetail = ({crewInfoes, setIsPop}) => {
-    console.log(crewInfoes)
-    
     const [old, setOld] = useState(0);
     const [isHover, setIsHover] = useState(false);
 
@@ -185,6 +184,11 @@ const CrewDetail = ({crewInfoes, setIsPop}) => {
             <button onClick={()=>{setIsPop(false)}}>닫기</button>
         </BoxPop>
     )
+}
+
+CrewDetail.propTypes = {
+    crewInfoes: PropTypes.object,
+    setIsPop: PropTypes.func
 }
 
 export default React.memo(CrewDetail);

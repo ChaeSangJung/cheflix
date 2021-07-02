@@ -101,7 +101,7 @@ const HomePresenter = ({
                     imageUrl={movie.poster_path}
                     title={movie.original_title}
                     rating={movie.vote_average}
-                    year={movie.release_date ? movie.release_date.substring(0, 4) : false}
+                    year={movie.release_date ? movie.release_date.substring(0, 4) : null}
                     isMovie={true}
                   />
                 ))}

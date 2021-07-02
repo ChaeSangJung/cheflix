@@ -11,6 +11,7 @@ import Header from "Components/Header";
 import Search from "Routes/Search";
 import Detail from "Routes/Detail";
 import More from "Routes/More";
+import Season from "Routes/Season";
 
 export default () => (
   <Router>
@@ -21,8 +22,11 @@ export default () => (
         <Route path="/tv" component={TV} />
         <Route path="/search" component={Search} />
         <Route path="/movie/:id" component={Detail} />
-        <Route path="/show/:id" component={Detail} />
+        <Route path="/show/:id" exact component={Detail} />
         <Route path="/now_more" component={More} />
+        {/* <Route path="/season/:id/number/:number" component={Season} /> */}
+        {/* <Route path="/season/:id/season_number/:season_number" component={Season} /> */}
+        <Route path="/show/:id/season_number/:season_number" exact component={Season} />
         <Redirect from="*" to="/" />
       </Switch>
     </>

@@ -6,8 +6,8 @@ const TVContainer = () => {
   const [topRated, setTopRated] = useState([]);
   const [popular, setPopular] = useState([]);
   const [airingToday, setAiringToday] = useState([]);
-  const [loading, setLoading] = useState([]);
-  const [error, setError] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   const LoadData = async () => {
     try{
