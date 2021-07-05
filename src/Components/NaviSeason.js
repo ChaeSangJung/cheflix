@@ -6,6 +6,7 @@ import styled from "styled-components";
 const NavSeason = styled.div`
     position: relative;
     width: 100%;
+    height: 90px;
     text-align: center;
 `;
 const SeLink = styled(Link)`
@@ -198,14 +199,14 @@ const NaviSeason = ({
                                             </BoxNameDate>
                                             <>
                                                 <TextStartInfo>
-                                                    {
-                                                        `
-                                                        ${list.name} of ${tvTitle} premiered on 
-                                                        ${month[parseInt(list.air_date.split("-")[1]-1)]} ${list.air_date.split("-")[2]}, ${list.air_date.split("-")[0]}
-                                                        ` 
-                                                    }
+                                                    {`${list.name} of ${tvTitle} premiered on`}
+                                                    <br/>
+                                                    {`${month[parseInt(list.air_date.split("-")[1]-1)]} ${list.air_date.split("-")[2]}, ${list.air_date.split("-")[0]}`}
                                                 </TextStartInfo>
-                                                {list.overview ? (<TextListOverview>{list.overview}</TextListOverview>) : null}
+                                                {list.overview ? (
+                                                    <TextListOverview>
+                                                        {list.overview.length > 200 ? `${list.overview.substring(0,150)}...` : list.overview }
+                                                    </TextListOverview>) : null}
                                             </>
                                         </BoxListText>
                                     </WrapList>

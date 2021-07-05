@@ -341,7 +341,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
           />
           <WrapData>
             <WrapTitle>
-            <TextTitle>                
+              <TextTitle>                
                 {result.original_title
                   ? result.original_title
                   : result.original_name}

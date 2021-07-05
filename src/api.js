@@ -58,4 +58,5 @@ export const crewApi = {
         query: encodeURIComponent(term)
       }
     }), 
+  getImg: (id) => api.get(`/person/${id}/images`),
 }

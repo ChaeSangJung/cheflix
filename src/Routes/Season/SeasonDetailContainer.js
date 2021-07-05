@@ -27,6 +27,8 @@ const SeasonDetailContainer = ({match, history}) => {
     const [geSeason, setGeSeason] = useState([]);
     const [isList, setIsList] = useState(false);
 
+    const [epResult, setEpResult] = useState({})
+
     const loadData = async () => {
         const parseId = parseInt(id);
         const parseNumber = parseInt(season_number);
@@ -43,9 +45,8 @@ const SeasonDetailContainer = ({match, history}) => {
             
             const { data : epiListResult } = await tvApi.tvSeason(parseId, parseNumber);
 
-            console.log(epiListResult);
-
             setGeSeason(seasons);
+            setEpResult(epiListResult);
 
             const arr_season = seasons.map(season => season.season_number);
 
@@ -132,6 +133,7 @@ const SeasonDetailContainer = ({match, history}) => {
             geSeason={geSeason}
             isList={isList}
             setIsList={setIsList}
+            epResult={epResult}
         />
     )
 }
