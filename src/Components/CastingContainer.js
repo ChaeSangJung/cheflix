@@ -3,7 +3,7 @@ import CastingDetail from "./CastingDetail";
 import CrewDetail from "./CrewDetail";
 import styled from "styled-components";
 import { crewApi } from "../api";
-import useAsync from '../hooks/useAsync';
+import { useAsync } from '../hooks';
 
 const OuterCast = styled.div`
   padding-top: 60px;

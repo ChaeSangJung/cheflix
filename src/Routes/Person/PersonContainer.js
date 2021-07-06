@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { crewApi } from "api"
+import React, { useEffect, useState, useCallback } from "react";
+import { useAsync } from '../../hooks';
+import { crewApi, moviesApi } from "api"
 
 import PesrsonPresenter from "./PersonPresenter";
 
@@ -10,6 +11,15 @@ const PersonContainer = ({match}) => {
     const [personResult, setPersonResult] = useState({});
     const [olds, setOlds] = useState(0);
     const [profileImg, setProfileImg] = useState([]);
+    const [height, setHeight] = useState(0);
+    const [movieCredit, setMovieCredit] = useState({});
+
+    const measuredRef = useCallback(node => {
+        if(node !== null) {
+            const width = node.getBoundingClientRect().width;
+            setHeight(width*1.5)
+        }
+    },[]);
 
     const getOld = (birthYear, deathYear) => {
         const today = new Date();
@@ -41,14 +51,17 @@ const PersonContainer = ({match}) => {
             return years_old;
         }
     }
+
     const loadData = async () => {
         try {
             const { data:personResult } = await crewApi.getPerson(id);
+            const { data : {profiles : profileImg} } = await crewApi.getImg(id);
             setPersonResult(personResult);
             const olds = getOld(personResult.birthday, personResult.deathday);
             setOlds(olds);
-            const { data : {profiles : profileImg} } = await crewApi.getImg(id);
-            setProfileImg(profileImg)
+            setProfileImg(profileImg);
+            const { data : movieCreditResult } = await crewApi.getMovieCredit(id);
+            setMovieCredit(movieCreditResult);
         } catch {
             console.log("Can't find anything");
         } finally {
@@ -56,6 +69,16 @@ const PersonContainer = ({match}) => {
         }
     }
 
+    const getMovieInfo = async(id) => {
+        const parsedId = parseInt(id);
+        const {data : movieData} = await moviesApi.movieDetail(parsedId);
+        return movieData;
+    }
+    const [state, getMovie] = useAsync(getMovieInfo, [], true);
+    const {loading:movieLoading, data: MovieInfoes, error:movieError} = state;
+
+    console.log(MovieInfoes)
+    
     useEffect(()=>{
         loadData();
     },[]);
@@ -66,6 +89,13 @@ const PersonContainer = ({match}) => {
             personResult={personResult}
             olds={olds}
             profileImg={profileImg}
+            height={height}
+            measuredRef={measuredRef}
+            movieCredit={movieCredit}
+            getMovie={getMovie}
+            movieLoading={movieLoading}
+            MovieInfoes={MovieInfoes}
+            movieError={movieError}
         />
     )
 }

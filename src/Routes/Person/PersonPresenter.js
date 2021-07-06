@@ -3,9 +3,16 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "Components/Loader";
+import Credit from "Components/Credit"
 
-const Container = styled.div`
-    height: calc(100vh - 50px);
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+
+import SwiperCore, { Navigation } from "swiper/core";
+
+SwiperCore.use([Navigation]);
+
+const Container = styled.div`    
     width: 100%;
     position: relative;
     padding: 50px;
@@ -74,10 +81,35 @@ const Overview = styled.p`
     line-height: 1.6;
     width: 50%;
 `;
+const WrapImg = styled.div`
+    margin-top: 70px;
+`;
+const ListImg = styled.ul`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, calc(100%/12));
+    gap: 25px;
+`;
+const CoverImg = styled.div`
+    width: 100%;
+    height: ${(props)=>`${props.xheight}px`};
+    background-image: url(${(props)=>props.imgurl});
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+`;
+const WrapCast = styled.div`
+    width: 1000px;
+    margin-top: 15px;
+    .swiper-slide {
+        width: 200px;
+    }
+`;
+const TextSubTitle = styled.strong`
+    font-size: 20px;
+`;
 
-
-const PesrsonPresenter = ({loading, personResult, olds, profileImg}) => {
-    console.log(profileImg)
+const PesrsonPresenter = ({loading, personResult, olds, profileImg, height, measuredRef, movieCredit, getMovie, movieLoading, MovieInfoes, movieError}) => {
+    
     return (
         loading ? 
         <>
@@ -155,18 +187,58 @@ const PesrsonPresenter = ({loading, personResult, olds, profileImg}) => {
                     )}
                 </WrapData>
             </Content>
+            
+            {/* movie credit */}
+            {movieCredit && (movieCredit.cast.length > 0 || movieCredit.crew.length > 0) && (
+                <WrapImg>
+                    {movieCredit.cast && movieCredit.cast.length>0 && (
+                        <>
+                            <TextSubTitle>Casting({movieCredit.cast.length})</TextSubTitle>
+                            <WrapCast>
+                                <Swiper 
+                                    tag="div" 
+                                    wrapperTag="div" 
+                                    id="videoSwiper"
+                                    spaceBetween={0}
+                                    slidesPerGroup={5}
+                                    slidesPerView={"auto"}
+                                    navigation={true}
+                                    freeMode={true}
+                                >
+                                    {movieCredit.cast.map((cas)=>(
+                                        <SwiperSlide key={cas.id}>
+                                            <Credit 
+                                                credit={cas} 
+                                                isMovie={true} 
+                                                getMovie={getMovie}
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                                {movieLoading ? (
+                                    <div>Loading</div>
+                                    ) : (
+                                    MovieInfoes && (
+                                        <div>get</div>
+                                    )
+                                )}
+                            </WrapCast>
+                        </>
+                    )}
+                </WrapImg>
+            )}
 
             {/* images */}
-            <div>
-                <ul>
-                    {profileImg.map((img, index)=>(
+            <WrapImg>
+                <ListImg>
+                    {profileImg.map((img)=>(
                         <li key={img.file_path.split(".")[0].substring(1)}>
-                            <img src={`https://image.tmdb.org/t/p/w300${img.file_path}`} alt={`${personResult.name} ${index + 1}`} />
+                            <CoverImg imgurl={`https://image.tmdb.org/t/p/w300${img.file_path}`} xheight={height} ref={measuredRef}>
+                            </CoverImg>
                         </li>
                     ))}
-                    
-                </ul>
-            </div>
+                </ListImg>
+            </WrapImg>
         </Container>
     )
 }
@@ -175,7 +247,13 @@ PesrsonPresenter.propTypes = {
     loading : PropTypes.bool,
     personResult : PropTypes.object,
     olds : PropTypes.number,
-    profileImg : PropTypes.array
+    profileImg : PropTypes.array,
+    height: PropTypes.number,
+    measuredRef: PropTypes.func,
+    movieCredit : PropTypes.object,
+    getMovie : PropTypes.func,
+    movieLoading : PropTypes.bool,
+    MovieInfoes : PropTypes.object,
 }
 
 export default PesrsonPresenter;

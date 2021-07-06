@@ -58,8 +58,11 @@ function useAsync(callback, deps = [], skip = false) {
     fetchData();
     // eslint 설정을 다음 줄에서만 비활성화
     // eslint-disable-next-line
+    return () => {
+      fetchData();
+    };
   }, deps);
-
+  
   return [state, fetchData];
 }
 
