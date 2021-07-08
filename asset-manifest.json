@@ -1,15 +1,15 @@
 {
-  "main.js": "/static/js/main.c5ea953e.chunk.js",
-  "main.js.map": "/static/js/main.c5ea953e.chunk.js.map",
-  "static/css/1.46c77477.chunk.css": "/static/css/1.46c77477.chunk.css",
-  "static/js/1.07a3bf19.chunk.js": "/static/js/1.07a3bf19.chunk.js",
-  "static/js/1.07a3bf19.chunk.js.map": "/static/js/1.07a3bf19.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/noPosterSmall.png": "/static/media/noPosterSmall.87a0eb6a.png",
-  "static/media/user.png": "/static/media/user.52e4201e.png",
-  "static/css/1.46c77477.chunk.css.map": "/static/css/1.46c77477.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.2a4b6712bc6860691807ac790e696209.js": "/precache-manifest.2a4b6712bc6860691807ac790e696209.js",
-  "service-worker.js": "/service-worker.js"
+  "main.js": "/cheflix/static/js/main.c5ea953e.chunk.js",
+  "main.js.map": "/cheflix/static/js/main.c5ea953e.chunk.js.map",
+  "static/css/1.46c77477.chunk.css": "/cheflix/static/css/1.46c77477.chunk.css",
+  "static/js/1.9421c7cb.chunk.js": "/cheflix/static/js/1.9421c7cb.chunk.js",
+  "static/js/1.9421c7cb.chunk.js.map": "/cheflix/static/js/1.9421c7cb.chunk.js.map",
+  "runtime~main.js": "/cheflix/static/js/runtime~main.7c714743.js",
+  "runtime~main.js.map": "/cheflix/static/js/runtime~main.7c714743.js.map",
+  "static/media/noPosterSmall.png": "/cheflix/static/media/noPosterSmall.87a0eb6a.png",
+  "static/media/user.png": "/cheflix/static/media/user.52e4201e.png",
+  "static/css/1.46c77477.chunk.css.map": "/cheflix/static/css/1.46c77477.chunk.css.map",
+  "index.html": "/cheflix/index.html",
+  "precache-manifest.120b172d95718c85c0f596e4a0ebf20c.js": "/cheflix/precache-manifest.120b172d95718c85c0f596e4a0ebf20c.js",
+  "service-worker.js": "/cheflix/service-worker.js"
 }
