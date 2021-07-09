@@ -18,7 +18,8 @@ const WrapCast = styled.div`
 `;
 const BoxCastImage = styled.div`
     overflow: hidden;
-    width: 100%;  
+    width: 100%;
+    cursor: pointer;  
     img {
         width: 100%;
         height: 100%;
