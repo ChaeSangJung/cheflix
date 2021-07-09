@@ -195,18 +195,23 @@ const NaviSeason = ({
                                         <BoxListText>
                                             <BoxNameDate>
                                                 <TextListName>{list.name}&nbsp;</TextListName>
-                                                <TextListAir>({list.air_date.split("-")[0]} | {list.episode_count} Episodes)</TextListAir>
+                                                <TextListAir>({list.air_date ? list.air_date.split("-")[0] : null} | {list.episode_count} Episodes)</TextListAir>
                                             </BoxNameDate>
                                             <>
                                                 <TextStartInfo>
-                                                    {`${list.name} of ${tvTitle} premiered on`}
-                                                    <br/>
-                                                    {`${month[parseInt(list.air_date.split("-")[1]-1)]} ${list.air_date.split("-")[2]}, ${list.air_date.split("-")[0]}`}
+                                                    {list.name}&nbsp;{list.air_date ? `of ${tvTitle} premiered on` : null}
+                                                        {list.air_date ? (
+                                                        <>
+                                                        <br/>
+                                                            {`${month[parseInt(list.air_date.split("-")[1]-1)]} ${list.air_date.split("-")[2]}, ${list.air_date.split("-")[0]}`}
+                                                        </>
+                                                    ) : null}
                                                 </TextStartInfo>
                                                 {list.overview ? (
                                                     <TextListOverview>
-                                                        {list.overview.length > 200 ? `${list.overview.substring(0,150)}...` : list.overview }
-                                                    </TextListOverview>) : null}
+                                                        {list.overview.length > 200 ? `${list.overview.substring(0,150)}...` : list.overview}
+                                                    </TextListOverview>) : null
+                                                }
                                             </>
                                         </BoxListText>
                                     </WrapList>

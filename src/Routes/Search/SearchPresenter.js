@@ -33,7 +33,7 @@ const SearchPresenter = ({
   keyUpDebounce
 }) => (
   <Container>
-    <Helmet title="Search | Nomflix" />
+    <Helmet title="Search | Cheflix" />
     <Form onSubmit={handleSubmit}>
       <Input
         placeholder="Search Movies or TV Shows..."

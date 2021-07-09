@@ -1,4 +1,4 @@
-# Nomflix
+# Cheflix
 
 Learning React and ES6 by building a Movie Discovery App.
 
@@ -43,8 +43,20 @@ Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
 - [ ] search bar with redux
 - [ ] [making skeleton screen](https://unordinarydays.tistory.com/184)
 - [ ] TV season swiper
-= [X] make person page
+- [X] make person page
 - [X] season page
 - [X] season navi
 - [X] person image
-= [X] Detail page video swipejs
+- [X] Detail page video swipejs
+
+# repair
+- https://github.com/ChaeSangJung/cheflix/commit/afd86077a973e93b17d3e2a71319550873857441
+- [X] src/Components/SeasonDetail.js
+- [X] src/Routes/Season/SeasonDetailPresnter.js
+- [X] src/Components/NaviSeason.js 
+- [X] src/Routes/Detail/DetailPresenter.js
+- [ ] src/Components/CastingDetail.js
+- [ ] src/Components/Credit.js 
+- [ ] src/Routes/Person/PersonContainer.js
+- [ ] src/Routes/Person/PersonPresenter.js
+- [ ] src/api.js

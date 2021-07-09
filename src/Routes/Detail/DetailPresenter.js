@@ -314,14 +314,14 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
     loading ?  
       <>
         <Helmet
-              title= "Loading | Nomflix"
+              title= "Loading | Cheflix"
         />
         <Loader />
       </>
     :
     <Container>
       <Helmet 
-        title = {`${result.original_title ? result.original_title : result.original_name} | Nomflix`}
+        title = {`${result.original_title ? result.original_title : result.original_name} | Cheflix`}
       />
           
 
@@ -346,12 +346,13 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
                   ? result.original_title
                   : result.original_name}
               </TextTitle>
-              <TextTitle>
-                (
-                  {result.release_date
-                    ? result.release_date.substring(0, 4)
-                    : result.first_air_date.substring(0, 4)}
-                )
+              <TextTitle>                
+                {result.release_date ? (
+                  result.release_date.length > 0 ? `(${result.release_date.substring(0, 4)})` : null
+                ) : null}
+                {result.first_air_date ? (
+                  result.first_air_date.length > 0 ? `(${result.first_air_date.substring(0, 4)})` : null
+                ) : null}
               </TextTitle>
               {result.imdb_id ? 
                 <GoImdb href={`https://www.imdb.com/title/${result.imdb_id}`} rel='noopener noreferrer' target='_blank'>IMDB</GoImdb> 

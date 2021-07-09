@@ -29,7 +29,7 @@ const HomePresenter = ({
 }) => {
   return (
     <>
-      <Helmet title="Movies | Nomflix"/>
+      <Helmet title="Movies | Cheflix"/>
       {loading ? (<Loader />):(
         <>
           <WrapVisual>
@@ -61,7 +61,7 @@ const HomePresenter = ({
             </Swiper>
           </WrapVisual>
           <Container>
-            <Helmet title="Movies | Nomflix" />
+            <Helmet title="Movies | Cheflix" />
             {nowPlaying && nowPlaying.length > 0 && (
               <Section  title="Now Playing" link="/now_more" isHome={true}>
                 {nowPlaying.map((movie) => (
