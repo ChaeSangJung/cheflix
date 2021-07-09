@@ -47,7 +47,8 @@ export const tvApi = {
   tvImdb: (id) => api.get(`tv/${id}/external_ids`),
   tvCredits: id => api.get(`tv/${id}/credits`),
   tvSeason: (id, number) => api.get(`/tv/${id}/season/${number}`), // TV Seasons get detail
-  tvEpisode: (id, number, epiNumber) => api.get(`/tv/${id}/season/${number}/episode/${epiNumber}`) // TV episode get detail /tv/{tv_id}/season/{season_number}/episode/{episode_number}
+  tvEpisode: (id, number, epiNumber) => api.get(`/tv/${id}/season/${number}/episode/${epiNumber}`), // TV episode get detail /tv/{tv_id}/season/{season_number}/episode/{episode_number}
+  getTvCredit: (id) => api.get(`/person/${id}/tv_credits`)
 };
 
 export const crewApi = {
