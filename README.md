@@ -55,7 +55,7 @@ Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
 - [X] src/Routes/Season/SeasonDetailPresnter.js
 - [X] src/Components/NaviSeason.js 
 - [X] src/Routes/Detail/DetailPresenter.js
-- [ ] src/Components/CastingDetail.js
+- [X] src/Components/CastingDetail.js
 - [ ] src/Components/Credit.js 
 - [ ] src/Routes/Person/PersonContainer.js
 - [ ] src/Routes/Person/PersonPresenter.js
