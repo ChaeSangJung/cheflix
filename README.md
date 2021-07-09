@@ -47,4 +47,5 @@ Try it on [netlify](https://clever-boyd-7aff23.netlify.app/#/)
 - [X] season page
 - [X] season navi
 - [X] person image
-= [X] Detail page video swipejs
+- [X] Detail page video swipejs
+= [ ]
