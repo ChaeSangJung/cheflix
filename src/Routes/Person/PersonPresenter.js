@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
@@ -114,14 +115,15 @@ const PesrsonPresenter = ({
     olds, 
     profileImg, 
     height, 
-    measuredRef, 
-    movieCredit, 
-    getMovie,     
-    movieLoading, 
-    MovieInfoes, 
-    movieError,
-    getShow, 
-    tvCredit
+    measuredRef,     
+    getData,
+    tvCredit,
+    movieCredit,
+    creditLoading,
+    creditData,
+    setIsPop,
+    isPop,
+    linkto
     }) => {
     
     return (
@@ -223,18 +225,11 @@ const PesrsonPresenter = ({
                                             <Credit 
                                                 credit={cas} 
                                                 isMovie={true} 
-                                                getData={getMovie}
+                                                getData={getData}
                                             />
                                         </SwiperSlide>
                                     ))}
                                 </Swiper>
-                                {movieLoading ? (
-                                    <div>Loading</div>
-                                    ) : (
-                                    MovieInfoes && (
-                                        <div>get</div>
-                                    )
-                                )}
                             </WrapCast>
                         </>
                     )}
@@ -261,7 +256,7 @@ const PesrsonPresenter = ({
                                     <Credit 
                                         credit={tv}
                                         isMovie={false}
-                                        getData={getShow}
+                                        getData={getData}
                                     />
                                 </SwiperSlide>
                             ))}
@@ -270,17 +265,32 @@ const PesrsonPresenter = ({
                 </WrapImg>
             )}
 
+            {isPop ? (
+                <div>
+                    {creditLoading ? "loading" : (
+                        <>
+
+                            <button onClick={()=>{setIsPop(false)}}>닫기</button>
+                            <Link to={linkto === "movie" ? `/movie/${creditData.id}` : linkto === "show" ? `/show/${creditData.id}` : `/person/${personResult.id}`}>link</Link>                        
+                        </>
+                    )}
+                </div>
+            ) : null}
+            
+
             {/* images */}
-            <WrapImg>
-                <ListImg>
-                    {profileImg.map((img)=>(
-                        <li key={img.file_path.split(".")[0].substring(1)}>
-                            <CoverImg imgurl={`https://image.tmdb.org/t/p/w300${img.file_path}`} xHeight={height} ref={measuredRef}>
-                            </CoverImg>
-                        </li>
-                    ))}
-                </ListImg>
-            </WrapImg>
+            {profileImg && profileImg.length > 0 && (
+                <WrapImg>
+                    <ListImg>
+                        {profileImg.map((img)=>(
+                            <li key={img.file_path.split(".")[0].substring(1)}>
+                                <CoverImg imgurl={`https://image.tmdb.org/t/p/w300${img.file_path}`} xHeight={height} ref={measuredRef}>
+                                </CoverImg>
+                            </li>
+                        ))}
+                    </ListImg>
+                </WrapImg>
+            )}
         </Container>
     )
 }
@@ -293,10 +303,12 @@ PesrsonPresenter.propTypes = {
     height: PropTypes.number,
     measuredRef: PropTypes.func,
     movieCredit : PropTypes.object,
-    getMovie : PropTypes.func,
-    movieLoading : PropTypes.bool,
-    MovieInfoes : PropTypes.object,
-    tvCredit : PropTypes.array
+    tvCredit : PropTypes.array,    
+    isPop: PropTypes.bool,
+    getData : PropTypes.func,
+    setIsPop : PropTypes.func,
+    creditLoading : PropTypes.bool,
+    creditData : PropTypes.object,
 }
 
 export default PesrsonPresenter;

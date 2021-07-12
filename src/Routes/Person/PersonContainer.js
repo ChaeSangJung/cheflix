@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useAsync } from '../../hooks';
-import { crewApi, moviesApi } from "api"
+import { crewApi, moviesApi, tvApi } from "api"
 
 import PesrsonPresenter from "./PersonPresenter";
 
@@ -14,6 +14,8 @@ const PersonContainer = ({match}) => {
     const [height, setHeight] = useState(0);
     const [movieCredit, setMovieCredit] = useState({});
     const [tvCredit, setTvCredit] = useState([]);
+    const [isPop, setIsPop] = useState(false);
+    const [linkto, setLinkTo] = useState("")
 
     const measuredRef = useCallback(node => {
         if(node !== null) {
@@ -75,18 +77,32 @@ const PersonContainer = ({match}) => {
         }
     }
 
-    const getMovieInfo = async(id) => {
+    // MOVIE SHOW pop
+        
+    const getDataInfo = async(id, isMovie) => {
         const parsedId = parseInt(id);
-        const {data : movieData} = await moviesApi.movieDetail(parsedId);
-        return movieData;
+        let temp_data;
+        if(isMovie) {
+            temp_data = await moviesApi.movieDetail(parsedId);
+        } else {
+            temp_data = await tvApi.showDetail(parsedId);
+        }
+        const {data : callData} = temp_data;
+        return callData;
     }
-    const [state, getMovie] = useAsync(getMovieInfo, [], true);
-    const getShow = (id) => {
-        console.log(id," soon")
-    }
-    const {loading:movieLoading, data: MovieInfoes, error:movieError} = state;
 
-    console.log(MovieInfoes)
+    const [movieState, getCallMovie] = useAsync(getDataInfo, [], true);
+    const {loading : creditLoading, data : creditData} = movieState;
+    
+    const getData = (id, isMovie) => {
+        setIsPop(true);
+        if(isMovie){
+            setLinkTo("movie");
+        } else {
+            setLinkTo("show");
+        }
+        getCallMovie(id,isMovie);
+    }
     
     useEffect(()=>{
         loadData();
@@ -100,13 +116,14 @@ const PersonContainer = ({match}) => {
             profileImg={profileImg}
             height={height}
             measuredRef={measuredRef}
-            movieCredit={movieCredit}            
-            getMovie={getMovie}
-            tvCredit={tvCredit}
-            getShow={getShow}
-            movieLoading={movieLoading}
-            MovieInfoes={MovieInfoes}
-            movieError={movieError}
+            movieCredit={movieCredit}
+            tvCredit={tvCredit}            
+            getData={getData}
+            creditLoading={creditLoading}
+            creditData={creditData}
+            setIsPop={setIsPop}
+            isPop={isPop}
+            linkto={linkto}
         />
     )
 }

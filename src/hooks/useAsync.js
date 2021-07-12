@@ -33,12 +33,13 @@ function useAsync(callback, deps = [], skip = false) {
   });
 
   const fetchData = async (id, param1, param2) => {
+    
     dispatch({ type: 'LOADING' });
     try {
-      if(id) {
+      if(id && !param1 && !param2) {
         const data = await callback(id);
         dispatch({ type: 'SUCCESS', data });
-      } else if(id && param1){
+      } else if(id && param1 && !param2){
         const data = await callback(id, param1);
         dispatch({ type: 'SUCCESS', data });
       } else if(id && param1 && param2){

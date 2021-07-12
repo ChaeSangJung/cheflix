@@ -28,20 +28,24 @@ const Credit = ({ credit, isMovie, getData }) => {
     return(
         <>
             <WrapLink>
+                
                 <CoverPoster
                     imgUrl={
                         credit.poster_path ? `https://image.tmdb.org/t/p/w300${credit.poster_path}` : require("../assets/noPosterSmall.png")
                     }
-                    onClick={()=>{getData(credit.id)}}
+                    onClick={()=>{getData(credit.id, isMovie)}}
                 />
+                
                 <BoxText>
                     <TextAllType>{
                         credit.original_title  ? credit.original_title 
                         : credit.original_name ? credit.original_name
                         : null
+
                     }</TextAllType>
                 </BoxText>
-                <Link to={isMovie ? `/movie/${credit.id}` : `/show/${credit.id}`}>link</Link>
+
+                <Link to={isMovie ? `/movie/${credit.id}` : `/show/${credit.id}`}></Link>
             </WrapLink>
         </>
     )
