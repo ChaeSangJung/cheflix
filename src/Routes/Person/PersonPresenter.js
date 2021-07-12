@@ -126,10 +126,73 @@ const WrapInner = styled.div`
 `;
 const BoxContent = styled.div`
     overflow-y: auto;
+    position: relative;
     display: inline-block;
     width: 600px;
-    max-height: 600px;
+    max-height: 400px;    
     background: rgba(0,0,0,0.5);
+`;
+const BoxBg = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    background-image: url(${(props) => props.backImg ? `https://image.tmdb.org/t/p/original${props.backImg}` : null });
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center, center;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+`;
+const DivContent = styled.div`
+    position: relative;
+    width: 94%;
+    margin: 3% auto 3%;
+    padding: 20px 15px 20px;
+    border: 3px solid #fff;
+    box-sizing: border-box;
+    text-align: left;
+`;
+const DivUpper = styled.div`
+    font-size: 0;
+    text-align: left;
+`;
+const BoxPoster = styled.div`
+    display: inline-block;
+    width: 170px;
+    height: 255px;
+    background-image: url(${(props) => props.bgImg ? `https://image.tmdb.org/t/p/w300${props.bgImg}` : require("../../../src/assets/noPosterSmall.png")});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;    
+    border: 5px solid #d4e8f5;
+    border-radius: 5px;
+    vertical-align: top;
+    box-sizing: border-box;
+`;
+const BoxTexts = styled.div`
+    display: inline-block;
+    width: calc(100% - 190px);
+    padding: 25px 10px 25px;
+    margin-left: 20px;
+    vertical-align: top;
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-sizing: border-box;
+`;
+const TextPopTitle = styled.p`
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    &+p {
+        margin-top: 12px;
+    }
+`;
+const TextPopName = styled(TextPopTitle)`
+    font-weight: 400;
 `;
 
 const PesrsonPresenter = ({
@@ -306,8 +369,35 @@ const PesrsonPresenter = ({
                     {creditLoading ? "loading" : (
                         <WrapInner className="dim">
                             <BoxContent>
-                                <button onClick={()=>{setIsPop(false)}}>닫기</button>
-                                <Link to={linkto === "movie" ? `/movie/${creditData.id}` : linkto === "show" ? `/show/${creditData.id}` : `/person/${personResult.id}`}>link</Link>                        
+                                <BoxBg backImg={creditData.backdrop_path}></BoxBg>
+                                <DivContent>
+                                    <DivUpper>
+                                        <BoxPoster bgImg={creditData.poster_path}></BoxPoster>
+                                        <BoxTexts>
+                                            <TextPopTitle>{creditData.title}</TextPopTitle>
+                                            {creditData.status 
+                                                ? (<TextPopName>{creditData.status} {creditData.release_date ? `(${creditData.release_date.split("-")[0]})`: null}</TextPopName>) 
+                                                : null
+                                            }
+                                            {creditData.genres && creditData.genres.length > 0 && (
+                                                <TextPopTitle>
+                                                {creditData.genres.map((genre, index)=>(
+                                                    (<span key={genre.id}>{genre.name}</span>)
+                                                ))}    
+                                                
+                                                </TextPopTitle>
+                                            )}
+                                            
+                                        </BoxTexts>
+                                    </DivUpper>
+                                    <div>
+                                        {/* overview */}
+                                    </div>                                    
+                                    <div>
+                                        <button onClick={()=>{setIsPop(false)}}>닫기</button>
+                                        <Link to={linkto === "movie" ? `/movie/${creditData.id}` : linkto === "show" ? `/show/${creditData.id}` : `/person/${personResult.id}`}>link</Link>
+                                    </div>
+                                </DivContent>
                             </BoxContent>
                         </WrapInner>
                     )}
