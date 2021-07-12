@@ -24,31 +24,33 @@ const PersonContainer = ({match}) => {
     const getOld = (birthYear, deathYear) => {
         const today = new Date();
         
-        const today_year = parseInt(today.getFullYear());
-        const today_month = parseInt(today.getMonth()+1);
-        const today_date = parseInt(today.getDate());
+        if(birthYear !== null || deathYear !== null){
+            const today_year = parseInt(today.getFullYear());
+            const today_month = parseInt(today.getMonth()+1);
+            const today_date = parseInt(today.getDate());
 
-        const birth_year = parseInt(birthYear.split("-")[0]);
-        const birth_month = parseInt(birthYear.split("-")[1]);
-        const birth_date = parseInt(birthYear.split("-")[2]);
+            const birth_year = parseInt(birthYear.split("-")[0]);
+            const birth_month = parseInt(birthYear.split("-")[1]);
+            const birth_date = parseInt(birthYear.split("-")[2]);
 
-        if(!deathYear) {            
-            let years_old = today_year - birth_year;
-            if(today_month - birth_month < 0 || (today_month === birth_month && today_date < birth_date)) {
-                years_old = years_old - 1;
+            if(!deathYear) {            
+                let years_old = today_year - birth_year;
+                if(today_month - birth_month < 0 || (today_month === birth_month && today_date < birth_date)) {
+                    years_old = years_old - 1;
+                }
+                return years_old;
+            } else {
+                const death_year = parseInt(deathYear.split("-")[0]);
+                const death_month = parseInt(deathYear.split("-")[1]);
+                const death_date = parseInt(deathYear.split("-")[2]);
+    
+                let years_old = death_year - birth_year;
+    
+                if(death_month - birth_month < 0 || (death_month === birth_month && death_date < birth_date)) {
+                    years_old = years_old - 1;
+                }
+                return years_old;
             }
-            return years_old;
-        } else {
-            const death_year = parseInt(deathYear.split("-")[0]);
-            const death_month = parseInt(deathYear.split("-")[1]);
-            const death_date = parseInt(deathYear.split("-")[2]);
-
-            let years_old = death_year - birth_year;
-
-            if(death_month - birth_month < 0 || (death_month === birth_month && death_date < birth_date)) {
-                years_old = years_old - 1;
-            }
-            return years_old;
         }
     }
 

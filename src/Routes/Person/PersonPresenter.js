@@ -182,9 +182,9 @@ const PesrsonPresenter = ({loading, personResult, olds, profileImg, height, meas
                             )
                         : null}
                     </ItemContainer>
-                    {personResult.biography && (
+                    {personResult.biography ? (
                         <Overview>{personResult.biography}</Overview>
-                    )}
+                    ) : null}
                 </WrapData>
             </Content>
             
