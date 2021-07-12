@@ -24,7 +24,7 @@ const TextAllType = styled.p`
     line-height: 1.6;
 `;
 
-const Credit = ({ credit, isMovie, getMovie }) => {
+const Credit = ({ credit, isMovie, getData }) => {
     return(
         <>
             <WrapLink>
@@ -32,10 +32,14 @@ const Credit = ({ credit, isMovie, getMovie }) => {
                     imgUrl={
                         credit.poster_path ? `https://image.tmdb.org/t/p/w300${credit.poster_path}` : require("../assets/noPosterSmall.png")
                     }
-                    onClick={()=>{getMovie(credit.id)}}
+                    onClick={()=>{getData(credit.id)}}
                 />
                 <BoxText>
-                    <TextAllType>{credit.original_title}</TextAllType>
+                    <TextAllType>{
+                        credit.original_title  ? credit.original_title 
+                        : credit.original_name ? credit.original_name
+                        : null
+                    }</TextAllType>
                 </BoxText>
                 <Link to={isMovie ? `/movie/${credit.id}` : `/show/${credit.id}`}>link</Link>
             </WrapLink>

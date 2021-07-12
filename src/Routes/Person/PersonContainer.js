@@ -13,6 +13,7 @@ const PersonContainer = ({match}) => {
     const [profileImg, setProfileImg] = useState([]);
     const [height, setHeight] = useState(0);
     const [movieCredit, setMovieCredit] = useState({});
+    const [tvCredit, setTvCredit] = useState([]);
 
     const measuredRef = useCallback(node => {
         if(node !== null) {
@@ -62,8 +63,11 @@ const PersonContainer = ({match}) => {
             const olds = getOld(personResult.birthday, personResult.deathday);
             setOlds(olds);
             setProfileImg(profileImg);
-            const { data : movieCreditResult } = await crewApi.getMovieCredit(id);
-            setMovieCredit(movieCreditResult);
+            const { data : movieResults} = await crewApi.getMovieCredit(id);
+            setMovieCredit(movieResults);
+
+            const { data : {cast : showResults} } = await crewApi.getTvCredit(id);
+            setTvCredit(showResults);
         } catch {
             console.log("Can't find anything");
         } finally {
@@ -77,6 +81,9 @@ const PersonContainer = ({match}) => {
         return movieData;
     }
     const [state, getMovie] = useAsync(getMovieInfo, [], true);
+    const getShow = (id) => {
+        console.log(id," soon")
+    }
     const {loading:movieLoading, data: MovieInfoes, error:movieError} = state;
 
     console.log(MovieInfoes)
@@ -93,8 +100,10 @@ const PersonContainer = ({match}) => {
             profileImg={profileImg}
             height={height}
             measuredRef={measuredRef}
-            movieCredit={movieCredit}
+            movieCredit={movieCredit}            
             getMovie={getMovie}
+            tvCredit={tvCredit}
+            getShow={getShow}
             movieLoading={movieLoading}
             MovieInfoes={MovieInfoes}
             movieError={movieError}

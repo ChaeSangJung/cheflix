@@ -60,4 +60,5 @@ export const crewApi = {
     }), 
   getImg: (id) => api.get(`/person/${id}/images`),
   getMovieCredit: (id) => api.get(`/person/${id}/movie_credits`),
+  getTvCredit: (id) => api.get(`/person/${id}/tv_credits`)
 }

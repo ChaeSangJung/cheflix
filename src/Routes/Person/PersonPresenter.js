@@ -91,7 +91,7 @@ const ListImg = styled.ul`
 `;
 const CoverImg = styled.div`
     width: 100%;
-    height: ${(props)=>`${props.xheight}px`};
+    height: ${(props)=>`${props.xHeight}px`};
     background-image: url(${(props)=>props.imgurl});
     background-position: center center;
     background-repeat: no-repeat;
@@ -108,7 +108,21 @@ const TextSubTitle = styled.strong`
     font-size: 20px;
 `;
 
-const PesrsonPresenter = ({loading, personResult, olds, profileImg, height, measuredRef, movieCredit, getMovie, movieLoading, MovieInfoes, movieError}) => {
+const PesrsonPresenter = ({
+    loading, 
+    personResult, 
+    olds, 
+    profileImg, 
+    height, 
+    measuredRef, 
+    movieCredit, 
+    getMovie,     
+    movieLoading, 
+    MovieInfoes, 
+    movieError,
+    getShow, 
+    tvCredit
+    }) => {
     
     return (
         loading ? 
@@ -144,7 +158,6 @@ const PesrsonPresenter = ({loading, personResult, olds, profileImg, height, meas
                         {personResult.homepage ? (
                             <GoImdb href={personResult.homepage} rel='noopener noreferrer' target='_blank'>Homepage</GoImdb>
                         ) : null}
-                        
                     </WrapTitle>
                     
                     <ItemContainer>
@@ -193,12 +206,12 @@ const PesrsonPresenter = ({loading, personResult, olds, profileImg, height, meas
                 <WrapImg>
                     {movieCredit.cast && movieCredit.cast.length>0 && (
                         <>
-                            <TextSubTitle>Casting({movieCredit.cast.length})</TextSubTitle>
+                            <TextSubTitle>Movie Casting({movieCredit.cast.length})</TextSubTitle>
                             <WrapCast>
                                 <Swiper 
                                     tag="div" 
                                     wrapperTag="div" 
-                                    id="videoSwiper"
+                                    id="movieSwiper"
                                     spaceBetween={0}
                                     slidesPerGroup={5}
                                     slidesPerView={"auto"}
@@ -206,11 +219,11 @@ const PesrsonPresenter = ({loading, personResult, olds, profileImg, height, meas
                                     freeMode={true}
                                 >
                                     {movieCredit.cast.map((cas)=>(
-                                        <SwiperSlide key={cas.id}>
+                                        <SwiperSlide key={cas.credit_id}>
                                             <Credit 
                                                 credit={cas} 
                                                 isMovie={true} 
-                                                getMovie={getMovie}
+                                                getData={getMovie}
                                             />
                                         </SwiperSlide>
                                     ))}
@@ -228,12 +241,41 @@ const PesrsonPresenter = ({loading, personResult, olds, profileImg, height, meas
                 </WrapImg>
             )}
 
+            {/* tv credit */}
+            {tvCredit && tvCredit.length > 0 && (
+                <WrapImg>
+                    <TextSubTitle>TV Casting({tvCredit.length})</TextSubTitle>
+                    <WrapCast>
+                        <Swiper
+                            tag="div" 
+                            wrapperTag="div" 
+                            id="showSwiper"
+                            spaceBetween={0}
+                            slidesPerGroup={5}
+                            slidesPerView={"auto"}
+                            navigation={true}
+                            freeMode={true}
+                        >
+                            {tvCredit.map((tv)=>(
+                                <SwiperSlide key={tv.credit_id}>
+                                    <Credit 
+                                        credit={tv}
+                                        isMovie={false}
+                                        getData={getShow}
+                                    />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </WrapCast>
+                </WrapImg>
+            )}
+
             {/* images */}
             <WrapImg>
                 <ListImg>
                     {profileImg.map((img)=>(
                         <li key={img.file_path.split(".")[0].substring(1)}>
-                            <CoverImg imgurl={`https://image.tmdb.org/t/p/w300${img.file_path}`} xheight={height} ref={measuredRef}>
+                            <CoverImg imgurl={`https://image.tmdb.org/t/p/w300${img.file_path}`} xHeight={height} ref={measuredRef}>
                             </CoverImg>
                         </li>
                     ))}
@@ -254,6 +296,7 @@ PesrsonPresenter.propTypes = {
     getMovie : PropTypes.func,
     movieLoading : PropTypes.bool,
     MovieInfoes : PropTypes.object,
+    tvCredit : PropTypes.array
 }
 
 export default PesrsonPresenter;
