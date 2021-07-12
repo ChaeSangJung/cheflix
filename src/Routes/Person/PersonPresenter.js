@@ -108,6 +108,29 @@ const WrapCast = styled.div`
 const TextSubTitle = styled.strong`
     font-size: 20px;
 `;
+const WrapDim = styled.div`
+    z-index: 10;
+    overflow: hidden;
+    position: fixed;
+    display: table;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+`;
+const WrapInner = styled.div`
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+`;
+const BoxContent = styled.div`
+    overflow-y: auto;
+    display: inline-block;
+    width: 600px;
+    max-height: 600px;
+    background: rgba(0,0,0,0.5);
+`;
 
 const PesrsonPresenter = ({
     loading, 
@@ -265,19 +288,6 @@ const PesrsonPresenter = ({
                 </WrapImg>
             )}
 
-            {isPop ? (
-                <div>
-                    {creditLoading ? "loading" : (
-                        <>
-
-                            <button onClick={()=>{setIsPop(false)}}>닫기</button>
-                            <Link to={linkto === "movie" ? `/movie/${creditData.id}` : linkto === "show" ? `/show/${creditData.id}` : `/person/${personResult.id}`}>link</Link>                        
-                        </>
-                    )}
-                </div>
-            ) : null}
-            
-
             {/* images */}
             {profileImg && profileImg.length > 0 && (
                 <WrapImg>
@@ -291,6 +301,18 @@ const PesrsonPresenter = ({
                     </ListImg>
                 </WrapImg>
             )}
+            {isPop ? (
+                <WrapDim>
+                    {creditLoading ? "loading" : (
+                        <WrapInner className="dim">
+                            <BoxContent>
+                                <button onClick={()=>{setIsPop(false)}}>닫기</button>
+                                <Link to={linkto === "movie" ? `/movie/${creditData.id}` : linkto === "show" ? `/show/${creditData.id}` : `/person/${personResult.id}`}>link</Link>                        
+                            </BoxContent>
+                        </WrapInner>
+                    )}
+                </WrapDim>
+            ) : null}
         </Container>
     )
 }

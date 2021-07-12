@@ -15,7 +15,8 @@ const PersonContainer = ({match}) => {
     const [movieCredit, setMovieCredit] = useState({});
     const [tvCredit, setTvCredit] = useState([]);
     const [isPop, setIsPop] = useState(false);
-    const [linkto, setLinkTo] = useState("")
+    const [linkto, setLinkTo] = useState("");
+    const [isClick, setIsClick] = useState(false);
 
     const measuredRef = useCallback(node => {
         if(node !== null) {
@@ -23,6 +24,7 @@ const PersonContainer = ({match}) => {
             setHeight(width*1.5)
         }
     },[]);
+    const body = document.querySelector("body");
 
     const getOld = (birthYear, deathYear) => {
         const today = new Date();
@@ -107,6 +109,15 @@ const PersonContainer = ({match}) => {
     useEffect(()=>{
         loadData();
     },[]);
+
+    body.addEventListener("click", useCallback((event)=>{
+        const target = event.target;
+        
+        if(target.classList.contains("dim")){
+            setIsClick(true);
+            setIsPop(false);
+        }
+    },[isClick]));
 
     return (
         <PesrsonPresenter 

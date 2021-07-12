@@ -15,6 +15,7 @@ const CoverPoster = styled.div`
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
 `;
 const BoxText = styled.div`
     margin-top: 10px;
