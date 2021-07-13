@@ -123,7 +123,7 @@ const BoxStarOuter = styled.div`
 `;
 const BoxStarInner = styled.div`
   position: absolute;
-  width: 100%;
+  width: ${(props)=>(props.bgWidth > 0 ? `${props.bgWidth}%` : "0px")};
   height: 15px;
   background-image: url(${img_star});
   background-position: 0 -20px;
@@ -365,7 +365,7 @@ const DetailPresenter = ({ result, loading, error, isMovie, imdb_id, casts }) =>
               <ItemContainer>
                 <TextStatus>{`${result.status}`}</TextStatus>
                 <BoxStarOuter>
-                  <BoxStarInner style={{width:`${result.vote_average*10}%`}}></BoxStarInner>
+                  <BoxStarInner bgWidth={result.vote_average*10}></BoxStarInner>
                 </BoxStarOuter>
                 <TextRating>{result.vote_average}/10</TextRating>
               </ItemContainer>

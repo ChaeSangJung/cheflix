@@ -129,8 +129,17 @@ const BoxContent = styled.div`
     position: relative;
     display: inline-block;
     width: 600px;
-    max-height: 400px;    
+    height: 400px;    
     background: rgba(0,0,0,0.5);
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #111110;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: #383837;
+    }
 `;
 const BoxBg = styled.div`
     position: absolute;
@@ -159,9 +168,13 @@ const DivUpper = styled.div`
     font-size: 0;
     text-align: left;
 `;
-const BoxPoster = styled.div`
+const WrapLeft = styled.div`
     display: inline-block;
     width: 170px;
+`;
+const BoxPoster = styled.div`
+    display: block;
+    width: 100%;
     height: 255px;
     background-image: url(${(props) => props.bgImg ? `https://image.tmdb.org/t/p/w300${props.bgImg}` : require("../../../src/assets/noPosterSmall.png")});
     background-repeat: no-repeat;
@@ -169,19 +182,30 @@ const BoxPoster = styled.div`
     background-position: top center;    
     border: 5px solid #d4e8f5;
     border-radius: 5px;
-    vertical-align: top;
     box-sizing: border-box;
 `;
-const BoxTexts = styled.div`
+const WrapText = styled.div`
     display: inline-block;
     width: calc(100% - 190px);
-    padding: 25px 10px 25px;
     margin-left: 20px;
     vertical-align: top;
+`;
+const BoxTexts = styled.div`
+    display: block;
+    width: 100%;
+    padding: 25px 10px 25px;    
     background-color: rgba(0,0,0,0.3);
     border: 1px solid #fff;
     border-radius: 5px;
     box-sizing: border-box;
+`;
+const BoxOverView = styled(BoxTexts)`
+    margin-top: 15px;
+`;
+const TextOverView = styled.p`
+    font-size: 14px;
+    line-height: 1.6;
+    color: #fff;
 `;
 const TextPopTitle = styled.p`
     font-size: 14px;
@@ -194,6 +218,27 @@ const TextPopTitle = styled.p`
 const TextPopName = styled(TextPopTitle)`
     font-weight: 400;
 `;
+const BoxBtns = styled.div`
+    margin-top: 20px;
+`;
+const BtnClose = styled.button`
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    .fas {
+        font-size: 20px;
+        color : #fff;
+    }
+`;
+const LinkGo = styled(Link)`
+    display: inline-block;
+    margin-left: 20px;
+    .fas {
+        font-size: 16px;
+        color : #fff;
+    }
+`
 
 const PesrsonPresenter = ({
     loading, 
@@ -372,31 +417,40 @@ const PesrsonPresenter = ({
                                 <BoxBg backImg={creditData.backdrop_path}></BoxBg>
                                 <DivContent>
                                     <DivUpper>
-                                        <BoxPoster bgImg={creditData.poster_path}></BoxPoster>
-                                        <BoxTexts>
-                                            <TextPopTitle>{creditData.title}</TextPopTitle>
-                                            {creditData.status 
-                                                ? (<TextPopName>{creditData.status} {creditData.release_date ? `(${creditData.release_date.split("-")[0]})`: null}</TextPopName>) 
-                                                : null
-                                            }
-                                            {creditData.genres && creditData.genres.length > 0 && (
-                                                <TextPopTitle>
-                                                {creditData.genres.map((genre, index)=>(
-                                                    (<span key={genre.id}>{genre.name}</span>)
-                                                ))}    
-                                                
-                                                </TextPopTitle>
-                                            )}
-                                            
-                                        </BoxTexts>
+                                        <WrapLeft>
+                                            <BoxPoster bgImg={creditData.poster_path}></BoxPoster>
+                                            <BoxBtns>
+                                                <BtnClose onClick={()=>{setIsPop(false)}}>
+                                                    <i class="fas fa-times"></i>
+                                                </BtnClose>
+                                                <LinkGo to={linkto === "movie" ? `/movie/${creditData.id}` : linkto === "show" ? `/show/${creditData.id}` : `/person/${personResult.id}`}>
+                                                    <i className="fas fa-link"></i>
+                                                </LinkGo>
+                                            </BoxBtns>
+                                        </WrapLeft>
+                                        <WrapText>
+                                            <BoxTexts>
+                                                <TextPopTitle>{creditData.title || creditData.name ? creditData.title ? creditData.title : creditData.name : null}</TextPopTitle>
+                                                {creditData.status 
+                                                    ? (<TextPopName>{creditData.status} {creditData.release_date ? `(${creditData.release_date.split("-")[0]})`: null}</TextPopName>) 
+                                                    : null
+                                                }
+                                                {creditData.genres && creditData.genres.length > 0 && (
+                                                    <TextPopTitle>
+                                                    {creditData.genres.map((genre, index)=>(
+                                                        (<span key={genre.id}>{index !==0 ? ", " : null}{genre.name}</span>)
+                                                    ))}    
+                                                    
+                                                    </TextPopTitle>
+                                                )}
+                                            </BoxTexts>
+                                            {creditData.overview ? (
+                                                <BoxOverView>                                                
+                                                    <TextOverView>{creditData.overview.length > 200 ? `${creditData.overview.substring(0,200)}...` : creditData.overview}</TextOverView>
+                                                </BoxOverView>
+                                            ) : null}
+                                        </WrapText>
                                     </DivUpper>
-                                    <div>
-                                        {/* overview */}
-                                    </div>                                    
-                                    <div>
-                                        <button onClick={()=>{setIsPop(false)}}>닫기</button>
-                                        <Link to={linkto === "movie" ? `/movie/${creditData.id}` : linkto === "show" ? `/show/${creditData.id}` : `/person/${personResult.id}`}>link</Link>
-                                    </div>
                                 </DivContent>
                             </BoxContent>
                         </WrapInner>

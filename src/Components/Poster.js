@@ -73,7 +73,7 @@ const BoxOuter =styled.div`
 `;
 const BoxInner =styled.div`
   position: absolute;
-  width: 100%;
+  width: ${(props)=>(props.bgWidth > 0 ? `${props.bgWidth}%` : "0px")};
   height: 10px;
   background-image: url(${rating_star_home});
   background-position: 0 -20px;
@@ -108,7 +108,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
         <TextYear>{year}</TextYear>
         <BoxRating>
           <BoxOuter>
-            <BoxInner style={{width:`${rating*10}%`}}></BoxInner>
+            <BoxInner bgWidth={rating*10}></BoxInner>
           </BoxOuter>          
         </BoxRating>
         <TextRating>{rating}/10</TextRating>
