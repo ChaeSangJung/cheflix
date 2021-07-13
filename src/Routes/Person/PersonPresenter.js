@@ -421,7 +421,7 @@ const PesrsonPresenter = ({
                                             <BoxPoster bgImg={creditData.poster_path}></BoxPoster>
                                             <BoxBtns>
                                                 <BtnClose onClick={()=>{setIsPop(false)}}>
-                                                    <i class="fas fa-times"></i>
+                                                    <i className="fas fa-times"></i>
                                                 </BtnClose>
                                                 <LinkGo to={linkto === "movie" ? `/movie/${creditData.id}` : linkto === "show" ? `/show/${creditData.id}` : `/person/${personResult.id}`}>
                                                     <i className="fas fa-link"></i>

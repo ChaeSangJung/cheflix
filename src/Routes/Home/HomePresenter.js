@@ -52,8 +52,8 @@ const HomePresenter = ({
                 ))
               )}
               {upSwipe.arr && upSwipe.arr.length > 0 && (
-                upSwipe.arr.map((up)=>(
-                  <SwiperSlide key={`now_${up.id}_${Date.now()}`}>
+                upSwipe.arr.map((up, index)=>(
+                  <SwiperSlide key={`${up.id}_${index}`}>
                     <SwiperContent content={up} isMovie={true} title={upSwipe.title}/>
                   </SwiperSlide>
                 ))
