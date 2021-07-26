@@ -4,7 +4,7 @@ import { crewApi, moviesApi, tvApi } from "api"
 
 import PesrsonPresenter from "./PersonPresenter";
 
-const PersonContainer = ({match, history}) => {
+const PersonContainer = ({match}) => {
     const {params : { id }} = match;
     
     const [loading, setLoading] = useState(true);  
@@ -105,10 +105,6 @@ const PersonContainer = ({match, history}) => {
         }
         getCallMovie(id,isMovie);
     }
-
-    // const goBack = () => {
-    //     history.push("/search");
-    // };
     
     useEffect(()=>{
         loadData();

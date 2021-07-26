@@ -1,12 +1,8 @@
 import React, {useState} from "react";
-import { useSelector } from 'react-redux';
 import SearchPresenter from "./SearchPresenter";
 import { moviesApi, tvApi } from "../../api";
 
 const SearchContainer = () => {
-  const xxx  = useSelector(state => (state.searchReducer));
-  console.log(xxx);
-
   const [movieResults, setMovieResults] = useState(null);
   const [tvResults, setTvResults] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,7 +10,7 @@ const SearchContainer = () => {
   const [error,setError] = useState(null);
 
   const [timer, setTimer] =useState(0); // debouncing timer
-  
+
   const searchByTerm = async () => {
     // console.log(searchTerm)
     setLoading(true);

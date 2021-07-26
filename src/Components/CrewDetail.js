@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
@@ -132,39 +132,38 @@ const GoLink = styled(Link)`
     }
 `
 
-const CrewDetail = ({crewInfoes, setIsPop}) => {    
+const CrewDetail = ({crewInfoes, setIsPop}) => {
+    const [old, setOld] = useState(0);
     const [isHover, setIsHover] = useState(false);
 
-    // if(crewInfoes.birthday) {
-    //     const today = new Date();
-    //     const today_year = parseInt(today.getFullYear());
-    //     const today_month = parseInt(today.getMonth()+1);
-    //     const today_date = parseInt(today.getDate());
+    if(crewInfoes.birthday) {
+        const today = new Date();
+        const today_year = parseInt(today.getFullYear());
+        const today_month = parseInt(today.getMonth()+1);
+        const today_date = parseInt(today.getDate());
 
-    //     const birth_year = parseInt(crewInfoes.birthday.split("-")[0]);
-    //     const birth_month = parseInt(crewInfoes.birthday.split("-")[1]);
-    //     const birth_date = parseInt(crewInfoes.birthday.split("-")[2]);
+        const birth_year = parseInt(crewInfoes.birthday.split("-")[0]);
+        const birth_month = parseInt(crewInfoes.birthday.split("-")[1]);
+        const birth_date = parseInt(crewInfoes.birthday.split("-")[2]);
 
-    //     if(!crewInfoes.deathday) {            
-    //         let years_old = today_year - birth_year;
-    //         if(today_month - birth_month < 0 || (today_month === birth_month && today_date < birth_date)) {
-    //             years_old = years_old - 1;
-    //         }
-    //         // useMemo(() => setOld(years_old), [old]);
-    //         // setOld(years_old);
-    //     } else {
-    //         const death_year = parseInt(crewInfoes.deathday.split("-")[0]);
-    //         const death_month = parseInt(crewInfoes.deathday.split("-")[1]);
-    //         const death_date = parseInt(crewInfoes.deathday.split("-")[2]);
+        if(!crewInfoes.deathday) {            
+            let years_old = today_year - birth_year;
+            if(today_month - birth_month < 0 || (today_month === birth_month && today_date < birth_date)) {
+                years_old = years_old - 1;
+            }
+            useMemo(() => setOld(years_old), [old]);
+        } else {
+            const death_year = parseInt(crewInfoes.deathday.split("-")[0]);
+            const death_month = parseInt(crewInfoes.deathday.split("-")[1]);
+            const death_date = parseInt(crewInfoes.deathday.split("-")[2]);
 
-    //         let years_old = death_year - birth_year;
-    //         if(death_month - birth_month < 0 || (death_month === birth_month && death_date < birth_date)) {
-    //             years_old = years_old - 1;
-    //         }
-    //         // useMemo(() => setOld(years_old), [old]);
-    //         // setOld(years_old);
-    //     }
-    // }
+            let years_old = death_year - birth_year;
+            if(death_month - birth_month < 0 || (death_month === birth_month && death_date < birth_date)) {
+                years_old = years_old - 1;
+            }
+            useMemo(() => setOld(years_old), [old]);
+        }
+    }
 
     const handleHover = ((bool)=>{setIsHover(bool)}); 
 
@@ -213,7 +212,7 @@ const CrewDetail = ({crewInfoes, setIsPop}) => {
                                             : null
                                         }
                                         &nbsp;
-                                        {/* {!crewInfoes.deathday ? `(${old} years)`: null} */}
+                                        {!crewInfoes.deathday ? `(${old} years)`: null}
                                     </TextNames>
                                 </WrapText>
                                 {crewInfoes.deathday ? 
@@ -226,7 +225,7 @@ const CrewDetail = ({crewInfoes, setIsPop}) => {
                                                 ${parseInt(crewInfoes.deathday.split("-")[2])}
                                             `}
                                                 &nbsp;
-                                            {/* {`(${old} years)`} */}
+                                            {`(${old} years)`}
                                         </TextNames>
                                     </WrapText>
                                     : null
