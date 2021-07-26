@@ -23,7 +23,7 @@ const ImageContainer = styled.div`
   position: relative;
   &:hover {
     ${Image} {
-      opacity: 0.3;
+      opacity: 0.5;
     }
   }
   &:hover {    
