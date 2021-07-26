@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import no_img from "assets/noPosterSmall.png"
 
 import rating_star_home from './images/rating_star_home.png';
 
@@ -96,7 +97,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
           bgUrl={
             imageUrl
               ? `https://image.tmdb.org/t/p/w300${imageUrl}`
-              : require("../assets/noPosterSmall.png")
+              : no_img
           }
         /> 
         <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}><TextDetail>View Detail</TextDetail></Link>

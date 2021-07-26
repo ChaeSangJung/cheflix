@@ -45,7 +45,7 @@ const DetailContainer = ({location, match, history}) => {
   
   useEffect(() => {
     loadData();
-  },[]);
+  });
 
   return (
     <DetailPresenter result={result} loading={loading} isMovie={isMovie} imdb_id={imdb_id} casts={casts}/>

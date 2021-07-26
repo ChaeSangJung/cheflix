@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import no_img from "assets/noPosterSmall.png"
 
 const BoxSeasons = styled.div`
     position: relative;
@@ -29,7 +30,7 @@ const SeasonDetail = ({title, id, season}) => {
                 {season.poster_path ? (
                   <img src={`https://image.tmdb.org/t/p/w500${season.poster_path}`} alt={season.name}/>
                 ) : (
-                  <img src={require("../assets/noPosterSmall.png")} alt={season.name}/>
+                  <img src={no_img} alt={season.name}/>
                 )}
               </Link>
             </BoxPosterSeasons>

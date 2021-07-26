@@ -4,9 +4,9 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import VideoComponets from "Components/VideoComponets";
-import CastingContainer from "../../Components/CastingContainer";
-import SeasonContainer from "../../Components/SeasonContainer"
-import VideoContainer from "../../Components/VideoContainer";
+import CastingContainer from "Components/CastingContainer";
+import SeasonContainer from "Components/SeasonContainer"
+import VideoContainer from "Components/VideoContainer";
 
 import { useTabs } from "../../hooks";
 import img_star from './images/rating_star.png';

@@ -64,7 +64,10 @@ const HomeContainer = () => {
 
   useEffect(() => {
     LoadData();
-  }, []);
+    return () => {
+      LoadData();
+    };
+  });
 
   return (
     <HomePresenter

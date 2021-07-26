@@ -254,7 +254,7 @@ const PesrsonPresenter = ({
     creditData,
     setIsPop,
     isPop,
-    linkto
+    linkto,
     }) => {
     
     return (
