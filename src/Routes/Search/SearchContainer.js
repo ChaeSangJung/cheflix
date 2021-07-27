@@ -4,7 +4,7 @@ import SearchPresenter from "./SearchPresenter";
 import { moviesApi, tvApi } from "../../api";
 
 const SearchContainer = () => {
-
+  console.log("xxx")
   const [movieResults, setMovieResults] = useState(null);
   const [tvResults, setTvResults] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
