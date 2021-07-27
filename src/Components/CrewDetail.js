@@ -151,7 +151,7 @@ const CrewDetail = ({crewInfoes, setIsPop}) => {
             if(today_month - birth_month < 0 || (today_month === birth_month && today_date < birth_date)) {
                 years_old = years_old - 1;
             }
-            useMemo(() => setOld(years_old), [old]);
+            // useMemo(() => setOld(years_old), [old]);
         } else {
             const death_year = parseInt(crewInfoes.deathday.split("-")[0]);
             const death_month = parseInt(crewInfoes.deathday.split("-")[1]);
@@ -161,7 +161,7 @@ const CrewDetail = ({crewInfoes, setIsPop}) => {
             if(death_month - birth_month < 0 || (death_month === birth_month && death_date < birth_date)) {
                 years_old = years_old - 1;
             }
-            useMemo(() => setOld(years_old), [old]);
+            // useMemo(() => setOld(years_old), [old]);
         }
     }
 

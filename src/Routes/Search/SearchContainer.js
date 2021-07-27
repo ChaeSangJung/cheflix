@@ -1,8 +1,10 @@
 import React, {useState} from "react";
+
 import SearchPresenter from "./SearchPresenter";
 import { moviesApi, tvApi } from "../../api";
 
 const SearchContainer = () => {
+
   const [movieResults, setMovieResults] = useState(null);
   const [tvResults, setTvResults] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
