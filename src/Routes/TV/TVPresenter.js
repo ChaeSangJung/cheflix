@@ -46,7 +46,7 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) => (
             ))}
           </Section>
         )}
-        {airingToday && airingToday.length > 0 && (
+        {/* {airingToday && airingToday.length > 0 && (
           <Section title="Airing Today">
             {airingToday.map(show => (
               <Poster
@@ -59,7 +59,7 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) => (
               />
             ))}
           </Section>
-        )}
+        )} */}
         {error && <Message color="#e74c3c" text={error} />}
       </Container>
     )}
